@@ -56,4 +56,8 @@ public class Lutemon extends Specs {
         return (int) damage;
     }
 
+    public int getLevel(){
+        return level;
+    }
+
 }
