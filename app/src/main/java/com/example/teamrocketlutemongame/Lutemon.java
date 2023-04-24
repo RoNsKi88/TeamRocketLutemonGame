@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Lutemon extends Specs {
-    private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("blue","white","red","yellow"));
+    private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("blue","white","red","yellow","rainbow","cashbag"));
     private final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","Nuori osuja","Koodari","Lutesin Jäsen"));
 
     private int attack = 10;
@@ -16,23 +16,37 @@ public class Lutemon extends Specs {
     private int health = maxHealth;
     private static int id = 0;
 
-    private int level = 0;
+    private int level = 1;
+    double lvlUP = 10;
     private float experience = 0;
-    String color;
+    private String color;
     int imgFront,imgBack;
 
-    public Lutemon(String name, String color) {
+    public Lutemon(String name, String color,int boost) {
         id = id++;
         this.name = name;
         this.color = color;
         addStats(color);
-
+        for (int i=0;i<boost;i++){
+            if (color.equals("cashbag")){
+                maxHealth += i;
+            }
+            else{
+                levelUp();
+                level += 1;
+            }
+        }
     }
-    public Lutemon() {
+
+    public Lutemon(int boost) {
         Random random = new Random();
         color = colors.get(random.nextInt(colors.size()));
         name = enemyNames.get(random.nextInt(enemyNames.size()));
         addStats(color);
+        for (int i = 0;i<boost;i++){
+            levelUp();
+            level += 1;
+        }
     }
     private void addStats(String color){
 
@@ -66,20 +80,51 @@ public class Lutemon extends Specs {
                 imgFront = R.drawable.lute_front;
                 imgBack = R.drawable.lute_back;
                 break;
+            case "cashbag":
+                attack = 1;
+                defence = 0;
+                maxHealth = 20;
+                health = maxHealth;
+                imgFront = R.drawable.cash_bag;
+                imgBack = R.drawable.cash_bag;
+
             default:
         }
     }
-    private void levelUp(Lutemon lutemon){
+    public void addXP(int points){
+        experience += points;
 
-        for (int i = 0;i < lutemon.getLevel();i++){
-
+        if (experience > lvlUP){
+            levelUp();
+            level += 1;
+            System.out.println("levelUP!");
+            experience = 0;
         }
     }
-    public void printColor(){
-        System.out.println(color);
+    private void levelUp(){
+        int j;
+        lvlUP *= 1.3;
+        for (int i = 0;i < level;i++){
+            Random random = new Random();
+            j = (int)(Math.random()*3);
+            switch (j){
+                case 0:
+                    attack += 1;
+                    System.out.println("attacklvlup");
+                    break;
+                case 1:
+                    defence += 1;
+                    System.out.println("defencelvlup");
+                    break;
+                case 2:
+                    maxHealth += 1;
+                    System.out.println("maxhealthlvlup");
+                    break;
+            }
+        }
     }
     public int makeAttack(){
-        double damage = Math.random() * attack;
+        double damage = Math.random() * attack + 1;
         System.out.println("Damage number: "+ (int)damage);
         return (int) damage;
     }

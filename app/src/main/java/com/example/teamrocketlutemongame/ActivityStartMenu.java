@@ -27,6 +27,12 @@ public class ActivityStartMenu extends AppCompatActivity {
         btnSaveGame.setOnClickListener(listener);
         //btnDeleteSave.setOnClickListener(listener);
 
+        // Väliaikais ukkeli + lutemon luonti
+        Character character = new Character("matti");
+        character.setPlayerLutemon(new Lutemon("reiskaperäreikä","rainbow",20));
+        System.out.println(character.getPlayerLutemon().getName()+"    ukon lutikka  "+ character.getPlayerLutemon().getColor()+ "    väri      "+"PERKELE TÄÄLLÄ ON PASKAA");
+
+        Storage.getInstance().setPlayer(character);
 
 
     }

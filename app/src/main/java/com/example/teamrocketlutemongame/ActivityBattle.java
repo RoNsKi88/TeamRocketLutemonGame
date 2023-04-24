@@ -2,6 +2,7 @@ package com.example.teamrocketlutemongame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -17,8 +18,6 @@ public class ActivityBattle extends AppCompatActivity {
     private Button btnAttack;
     private TextView txtPlayerHP,txtEnemyHP,txtPlayerName, txtEnemyName;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +30,7 @@ public class ActivityBattle extends AppCompatActivity {
         imgPlayer = findViewById(R.id.imgPlayer);
         imgEnemy = findViewById(R.id.imgEnemy);
         player.getPlayerLutemon().getColor();
-        imgEnemy.setImageResource(player.getPlayerLutemon().imgFront);
+        imgEnemy.setImageResource(enemy.getPlayerLutemon().imgFront);
         imgPlayer.setImageResource(player.getPlayerLutemon().imgBack);
 
         ProgressBar progressBarPlayer = findViewById(R.id.progressBarPlayer);
@@ -39,9 +38,8 @@ public class ActivityBattle extends AppCompatActivity {
         progressBarEnemy.setProgress(100);
         progressBarPlayer.setProgress(100);
 
-
         txtEnemyHP = findViewById(R.id.txtEnemyHP);
-        txtEnemyHP.setText("HP "+enemy.getPlayerLutemon().getHP()+"/"+enemy.getPlayerLutemon().getHP());
+        txtEnemyHP.setText("HP "+enemy.getPlayerLutemon().getHP()+"/"+enemy.getPlayerLutemon().getMaxHP());
 
         txtEnemyName = findViewById(R.id.txtEnemyName);
         txtEnemyName.setText(enemy.getPlayerLutemon().getName());
@@ -50,10 +48,7 @@ public class ActivityBattle extends AppCompatActivity {
         txtPlayerName.setText(player.getPlayerLutemon().getName());
 
         txtPlayerHP = findViewById(R.id.txtPlayerHP);
-        txtPlayerHP.setText("HP "+player.getPlayerLutemon().getHP()+"/"+player.getPlayerLutemon().getHP());
-
-
-
+        txtPlayerHP.setText("HP "+player.getPlayerLutemon().getHP()+"/"+player.getPlayerLutemon().getMaxHP());
 
         btnAttack = findViewById(R.id.btnAttack);
         btnAttack.setOnClickListener(new View.OnClickListener() {
@@ -66,19 +61,27 @@ public class ActivityBattle extends AppCompatActivity {
                 int damage;
                 Handler attackHandler = new Handler();
 
-
-
-
-
-
-
                 btnAttack.setVisibility(View.GONE);
 
                 damage = battle.attack(player,imgPlayer,playerPosX,playerPosY,enemyPosX,enemyPosY);
+                double luku = Math.random();
+                System.out.println(luku);
+                if (luku < 0.1){
+                    System.out.println("Critical hit!");
+                    damage = damage * 4;
+                } else if (luku > 0.98) {
+                    System.out.println("Vihollinen oli liian ketterä lyönnillesi!");
+                    damage = 0;
+
+                }
 
                 damage = enemy.getPlayerLutemon().defend(damage);
-                txtEnemyHP.setText("HP "+enemy.getPlayerLutemon().getHP()+"/"+enemy.getPlayerLutemon().getMaxHP());
-
+                player.getPlayerLutemon().addXP(damage);
+                if (enemy.getPlayerLutemon().getHP() < 0) {
+                    txtEnemyHP.setText("HP " + 0 + "/" + enemy.getPlayerLutemon().getMaxHP());
+                }else {
+                    txtEnemyHP.setText("HP " + enemy.getPlayerLutemon().getHP() + "/" + enemy.getPlayerLutemon().getMaxHP());
+                }
                 int progress = (int)((float) enemy.getPlayerLutemon().getHP()/(float) enemy.getPlayerLutemon().getMaxHP()*100);
                 progressBarEnemy.setProgress(progress,true);
                 attackHandler.postDelayed(new Runnable() {
@@ -88,40 +91,40 @@ public class ActivityBattle extends AppCompatActivity {
                             int damage;
                             damage = battle.attack(enemy,imgEnemy, enemyPosX, enemyPosY, playerPosX, playerPosY);
                             damage = player.getPlayerLutemon().defend(damage);
-                            txtPlayerHP.setText("HP "+player.getPlayerLutemon().getHP()+"/"+player.getPlayerLutemon().getMaxHP());
+                            if (player.getPlayerLutemon().getHP() < 0){
+                                txtPlayerHP.setText("HP " + 0 + "/" + player.getPlayerLutemon().getMaxHP());
+                            }else {
+                                txtPlayerHP.setText("HP " + player.getPlayerLutemon().getHP() + "/" + player.getPlayerLutemon().getMaxHP());
+                            }
                             int progress = (int)((float) player.getPlayerLutemon().getHP()/(float) player.getPlayerLutemon().getMaxHP()*100);
                             progressBarPlayer.setProgress(progress,true);
 
                         }
                         else {
                             imgEnemy.animate().rotationX(60);
+                            player.getPlayerLutemon().resetHP();
+                            Intent intent = new Intent(ActivityBattle.this,ActivityMenu.class);
+                            startActivity(intent);
                         }
                     }
-                },1500);
+                },1200);
 
                 attackHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
+                        btnAttack.setVisibility(View.VISIBLE);
                         if (player.getPlayerLutemon().getHP() > 0) {
 
                         }
                         else {
                             imgPlayer.animate().rotationX(-60);
+                            player.getPlayerLutemon().resetHP();
+                            Intent intent = new Intent(ActivityBattle.this,ActivityMenu.class);
+                            startActivity(intent);
                         }
                     }
-                },1500);
-
-                btnAttack.setVisibility(View.VISIBLE);
-
+                },2700);
             }
         });
-
-
-
-
-
-
-
-
     }
 }
