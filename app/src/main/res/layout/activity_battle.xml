@@ -11,43 +11,43 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:srcCompat="@drawable/lute_back" />
 
     <ProgressBar
-        android:id="@+id/progressBar3"
+        android:id="@+id/progressBarPlayer"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
+        app:layout_constraintEnd_toEndOf="@+id/txtPlayerHP"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintStart_toStartOf="@+id/txtPlayerHP"
+        app:layout_constraintTop_toBottomOf="@+id/txtPlayerHP" />
 
     <ImageView
         android:id="@+id/imgEnemy"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@drawable/lute_front" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/progressBarEnemy"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="20dp"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
+        app:layout_constraintEnd_toEndOf="@+id/txtEnemyHP"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="@+id/txtEnemyHP"
+        app:layout_constraintTop_toBottomOf="@+id/txtEnemyHP" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/txtEnemyHP"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -59,7 +59,7 @@
         app:layout_constraintTop_toTopOf="@+id/imgEnemy" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtPlayerHP"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -71,14 +71,30 @@
         app:layout_constraintTop_toTopOf="@+id/imgPlayer" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnAttack"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Attack"
-        app:layout_constraintEnd_toEndOf="@+id/progressBar3"
+        app:layout_constraintEnd_toEndOf="@+id/progressBarPlayer"
         app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="@+id/progressBar3"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar3" />
+        app:layout_constraintStart_toStartOf="@+id/progressBarPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarPlayer" />
+
+    <TextView
+        android:id="@+id/txtPlayerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="@+id/imgPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/imgPlayer" />
+
+    <TextView
+        android:id="@+id/txtEnemyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/imgEnemy"
+        app:layout_constraintStart_toStartOf="@+id/imgEnemy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -19,6 +19,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="StartBattle"
-        tools:layout_editor_absoluteX="158dp"
-        tools:layout_editor_absoluteY="58dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="95dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,7 @@ public class Lutemon extends Specs {
     private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("blue","white","red","yellow"));
     private final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","Nuori osuja","Koodari","Lutesin Jäsen"));
 
-    private int attack = 1;
+    private int attack = 10;
     private int defence = 0;
     private int maxHealth = 20;
     private int health = maxHealth;
@@ -98,6 +98,15 @@ public class Lutemon extends Specs {
     }
     public String getColor(){
         return color;
+    }
+    public int getHP(){
+        return health;
+    }
+    public int getMaxHP(){
+        return maxHealth;
+    }
+    public void resetHP(){
+        health = maxHealth;
     }
 
 }
