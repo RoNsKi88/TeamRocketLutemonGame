@@ -1,31 +1,61 @@
 package com.example.teamrocketlutemongame;
 
-public class Lutemon extends Specs {
-    int attack = 1;
-    int defence = 0;
-    int maxHealth = 20;
-    int health = maxHealth;
+import android.widget.ImageView;
 
-    int level = 0;
-    float experience = 0;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Random;
+
+public class Lutemon extends Specs {
+    private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("blue","white","red","yellow"));
+    private final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","Nuori osuja","Koodari","Lutesin Jäsen"));
+
+    private int attack = 1;
+    private int defence = 0;
+    private int maxHealth = 20;
+    private int health = maxHealth;
+    private static int id = 0;
+
+    private int level = 0;
+    private float experience = 0;
     String color;
+    int imgFront,imgBack;
 
     public Lutemon(String name, String color) {
-
+        id = id++;
+        this.name = name;
         this.color = color;
+        addStats(color);
+
+    }
+    public Lutemon() {
+        Random random = new Random();
+        color = colors.get(random.nextInt(colors.size()));
+        name = enemyNames.get(random.nextInt(enemyNames.size()));
+        addStats(color);
+    }
+    private void addStats(String color){
+
         switch (color){
             case "blue":
                 maxHealth += 10;
                 health = maxHealth;
-
+                imgFront = R.drawable.lute_front;
+                imgBack = R.drawable.lute_back;
                 break;
             case "white":
                 defence += 10;
+                imgFront = R.drawable.lute_front;
+                imgBack = R.drawable.lute_back;
                 break;
             case "red":
                 attack += 10;
+                imgFront = R.drawable.lute_front;
+                imgBack = R.drawable.lute_back;
                 break;
             case "yellow":
+                imgFront = R.drawable.lute_front;
+                imgBack = R.drawable.lute_back;
 
                 break;
             case "rainbow":
@@ -33,8 +63,15 @@ public class Lutemon extends Specs {
                 defence += 10;
                 maxHealth +=10;
                 health = maxHealth;
+                imgFront = R.drawable.lute_front;
+                imgBack = R.drawable.lute_back;
+                break;
             default:
+        }
+    }
+    private void levelUp(Lutemon lutemon){
 
+        for (int i = 0;i < lutemon.getLevel();i++){
 
         }
     }
@@ -58,6 +95,9 @@ public class Lutemon extends Specs {
 
     public int getLevel(){
         return level;
+    }
+    public String getColor(){
+        return color;
     }
 
 }

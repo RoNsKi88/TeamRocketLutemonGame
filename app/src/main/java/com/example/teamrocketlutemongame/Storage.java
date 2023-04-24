@@ -11,7 +11,7 @@ public class Storage {
 
     }
     public static Storage getInstance(){
-        if (storage != null){
+        if (storage == null){
             storage = new Storage();
         }
         return storage;
@@ -21,6 +21,7 @@ public class Storage {
         return player;
     }
     public void setPlayer(Character player) {
+        System.out.println(player);
         this.player = player;
     }
 
