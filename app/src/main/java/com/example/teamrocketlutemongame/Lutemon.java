@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Lutemon extends Specs {
-    private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("Gray","Green","Orange","Pink","Rainbow","Cashbag"));
+    private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("Gray","Green","Orange","Pink","Rainbow"));
     private final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","Nuori osuja","Koodari","Lutesin Jäsen"));
 
     private int attack = 5;
@@ -29,8 +29,12 @@ public class Lutemon extends Specs {
         this.name = name;
         this.color = color;
         addStats(color);
+        if (color.equals("Cashbag")){
+            Random random = new Random();
+            this.name = enemyNames.get(random.nextInt(enemyNames.size()));
+        }
         for (int i=0;i<boost;i++){
-            if (color.equals("cashbag")){
+            if (color.equals("Cashbag")){
                 maxHealth += i;
             }
             else{

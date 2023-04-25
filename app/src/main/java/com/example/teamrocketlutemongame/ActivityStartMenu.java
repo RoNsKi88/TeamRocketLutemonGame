@@ -29,7 +29,7 @@ public class ActivityStartMenu extends AppCompatActivity {
 
         // Väliaikais ukkeli + lutemon luonti
         Character character = new Character("matti");
-        character.setPlayerLutemon(new Lutemon("reiskaperäreikä","rainbow",20));
+        character.setPlayerLutemon(new Lutemon("reiskaperäreikä","Rainbow",20));
         System.out.println(character.getPlayerLutemon().getName()+"    ukon lutikka  "+ character.getPlayerLutemon().getColor()+ "    väri      "+"PERKELE TÄÄLLÄ ON PASKAA");
 
         Storage.getInstance().setPlayer(character);
