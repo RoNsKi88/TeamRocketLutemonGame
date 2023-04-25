@@ -9,13 +9,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.teamrocketlutemongame.ActivityMenu;
+import com.example.teamrocketlutemongame.Lutemon;
 import com.example.teamrocketlutemongame.R;
+import com.example.teamrocketlutemongame.Storage;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +59,7 @@ public class CreatorFragment extends Fragment {
         return fragment;
     }
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +70,9 @@ public class CreatorFragment extends Fragment {
         }
     }
 
+
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_creator, container, false);
@@ -74,6 +82,13 @@ public class CreatorFragment extends Fragment {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(view.getContext(),R.array.Lutemons, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerLutemons.setAdapter(adapter);
+        TextView textviewHP = view.findViewById(R.id.textCreateHP);
+        TextView textviewAttack = view.findViewById(R.id.textCreateAttack);
+        TextView textviewDefence = view.findViewById(R.id.textCreateDefence);
+        TextView textviewSpecial = view.findViewById(R.id.textCreateSpecial);
+        Button btnCreateLutemon = view.findViewById(R.id.CreateBtn);
+        TextView TextviewName = view.findViewById(R.id.txtInputName);
+
         spinnerLutemons.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -81,27 +96,61 @@ public class CreatorFragment extends Fragment {
                     case 0:
                         System.out.println("00");
                         imgLutemon.setImageResource(R.drawable.gray_front);
-
+                        textviewHP.setText("HP: +10");
+                        textviewAttack.setText("ATT: -");
+                        textviewDefence.setText("DEF: -");
+                        textviewSpecial.setText("Special: -");
                         break;
                     case 1:
                         System.out.println("1");
                         imgLutemon.setImageResource(R.drawable.green_front);
+                        textviewHP.setText("HP: -");
+                        textviewAttack.setText("ATT: +5");
+                        textviewDefence.setText("DEF: -");
+                        textviewSpecial.setText("Special: -");
                         break;
                     case 2:
                         System.out.println("2");
                         imgLutemon.setImageResource(R.drawable.orange_front);
+                        textviewHP.setText("HP: -");
+                        textviewAttack.setText("ATT: -");
+                        textviewDefence.setText("DEF: -");
+                        textviewSpecial.setText("Special: Palava");
                         break;
                     case 3:
                         System.out.println("3");
                         imgLutemon.setImageResource(R.drawable.pink_front);
+                        textviewHP.setText("HP: +5");
+                        textviewAttack.setText("ATT: +2");
+                        textviewDefence.setText("DEF: +1");
+                        textviewSpecial.setText("Special: Karvainen");
                         break;
                     case 4:
                         System.out.println("4");
                         imgLutemon.setImageResource(R.drawable.rain_front);
+                        textviewHP.setText("HP: +10");
+                        textviewAttack.setText("ATT: +5");
+                        textviewDefence.setText("DEF: +5");
+                        textviewSpecial.setText("Special: Mitä?");
                         break;
                     default:
 
                 }
+                btnCreateLutemon.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                        String Name = TextviewName.getText().toString();
+
+                        String Color = spinnerLutemons.getSelectedItem().toString();
+                        Lutemon Uusi = new Lutemon(Name, Color, 0);
+                        Storage.getInstance().addLutemon(Uusi);
+                        System.out.println("Loit Lutemonin " + Name + ", Onnea.");
+
+
+
+                    }
+                });
             }
 
             @Override
