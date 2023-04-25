@@ -66,12 +66,10 @@ public class MenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
         RecyclerView shownLutemon = view.findViewById(R.id.selectedCharacterLutemon);
-        try {
-            shownLutemon.setLayoutManager(new LinearLayoutManager(view.getContext()));
-            shownLutemon.setAdapter(new PlayerLutemonAdapter(view.getContext(), Storage.getInstance().getPlayer().getPlayerLutemon()));
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+
+        shownLutemon.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        shownLutemon.setAdapter(new PlayerLutemonAdapter(view.getContext(), Storage.getInstance().getPlayer().getPlayerLutemon()));
+
 
 
         // Inflate the layout for this fragment

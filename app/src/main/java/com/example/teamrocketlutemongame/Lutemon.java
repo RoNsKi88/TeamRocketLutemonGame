@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Lutemon extends Specs {
-    private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("gray","green","orange","pink","rainbow","cashbag"));
+    private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("Gray","Green","Orange","Pink","Rainbow","Cashbag"));
     private final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","Nuori osuja","Koodari","Lutesin Jäsen"));
 
     private int attack = 5;
@@ -53,28 +53,28 @@ public class Lutemon extends Specs {
     private void addStats(String color){
 
         switch (color){
-            case "gray":
+            case "Gray":
                 maxHealth += 10;
                 health = maxHealth;
                 imgFront = R.drawable.gray_front;
                 imgBack = R.drawable.gray_back;
                 break;
-            case "green":
+            case "Green":
                 defence += 10;
                 imgFront = R.drawable.green_front;
                 imgBack = R.drawable.green_back;
                 break;
-            case "orange":
+            case "Orange":
                 attack += 10;
                 imgFront = R.drawable.orange_front;
                 imgBack = R.drawable.orange_back;
                 break;
-            case "pink":
+            case "Pink":
                 imgFront = R.drawable.pink_front;
                 imgBack = R.drawable.pink_back;
 
                 break;
-            case "rainbow":
+            case "Rainbow":
                 attack += 10;
                 defence += 10;
                 maxHealth +=10;
@@ -82,7 +82,7 @@ public class Lutemon extends Specs {
                 imgFront = R.drawable.rain_front;
                 imgBack = R.drawable.rain_back;
                 break;
-            case "cashbag":
+            case "Cashbag":
                 attack = 1;
                 defence = 0;
                 maxHealth = 20;

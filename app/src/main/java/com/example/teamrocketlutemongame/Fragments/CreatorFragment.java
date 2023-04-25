@@ -143,6 +143,7 @@ public class CreatorFragment extends Fragment {
                         String Name = TextviewName.getText().toString();
 
                         String Color = spinnerLutemons.getSelectedItem().toString();
+                        System.out.println(Color);
                         Lutemon Uusi = new Lutemon(Name, Color, 0);
                         Storage.getInstance().addLutemon(Uusi);
 

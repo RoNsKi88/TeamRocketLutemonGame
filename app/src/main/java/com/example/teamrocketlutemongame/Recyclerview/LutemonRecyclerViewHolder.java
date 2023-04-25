@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.teamrocketlutemongame.R;
 
 public class LutemonRecyclerViewHolder extends RecyclerView.ViewHolder {
-    protected TextView lutemonName,hp,atk,def,special;
+    protected TextView lutemonName,hp,atk,def,special,wins,deaths;
     protected ImageView lutemonImg;
 
 
@@ -23,6 +23,8 @@ public class LutemonRecyclerViewHolder extends RecyclerView.ViewHolder {
         def = itemView.findViewById(R.id.txtrvLutemonDEF);
         special = itemView.findViewById(R.id.txtrvLutemonSpecial);
         lutemonImg = itemView.findViewById(R.id.imgrvImage);
+        wins = itemView.findViewById(R.id.txtrvLutemonWins);
+        deaths = itemView.findViewById(R.id.txtrvLutemonLosses);
 
     }
 }

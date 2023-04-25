@@ -39,6 +39,8 @@ public class LutemonRecyclerViewAdapter extends RecyclerView.Adapter<LutemonRecy
         holder.atk.setText(String.valueOf(lutemon.getAtk()));
         holder.def.setText(String.valueOf(lutemon.getDef()));
         holder.special.setText(lutemon.getSpecial());
+        holder.wins.setText(String.valueOf(lutemon.getWins()));
+        holder.deaths.setText(String.valueOf(lutemon.getLosses()));
 
 
     }
