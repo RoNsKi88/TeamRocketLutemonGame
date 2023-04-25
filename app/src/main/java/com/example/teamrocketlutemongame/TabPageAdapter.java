@@ -27,7 +27,7 @@ public class TabPageAdapter extends FragmentStateAdapter {
             case 0:
                 return new MenuFragment();
             case 1:
-                return new CollectionFragment();
+                return CollectionFragment.getInstance();
             case 2:
                 return new CreatorFragment();
             default:

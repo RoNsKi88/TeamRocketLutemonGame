@@ -14,59 +14,37 @@ import com.example.teamrocketlutemongame.R;
 import com.example.teamrocketlutemongame.Recyclerview.LutemonRecyclerViewAdapter;
 import com.example.teamrocketlutemongame.Storage;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CollectionFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class CollectionFragment extends Fragment {
+    private static CollectionFragment collectionFragment = null;
     private LutemonRecyclerViewAdapter adapter;
-    private View porkkana;
+    private static View view;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public CollectionFragment() {
+    private CollectionFragment() {
         // Required empty public constructor
     }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CollectionFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CollectionFragment newInstance(String param1, String param2) {
-        CollectionFragment fragment = new CollectionFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static CollectionFragment getInstance(){
+        if (collectionFragment == null ){
+            collectionFragment = new CollectionFragment();
+        }
+        return collectionFragment;
     }
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_collection, container, false);
-        porkkana = view;
+        view = inflater.inflate(R.layout.fragment_collection, container, false);
+
         RecyclerView rvLutemons = view.findViewById(R.id.rcvLutemons);
         rvLutemons.setLayoutManager(new LinearLayoutManager(view.getContext()));
         rvLutemons.setAdapter(new LutemonRecyclerViewAdapter(view.getContext(), Storage.getInstance().getLutemons()));
@@ -76,8 +54,13 @@ public class CollectionFragment extends Fragment {
     @Override
     public void onResume(){
         super.onResume();
-        adapter = new LutemonRecyclerViewAdapter(porkkana.getContext(), Storage.getInstance().getLutemons());
+        adapter = new LutemonRecyclerViewAdapter(view.getContext(), Storage.getInstance().getLutemons());
 
+    }
+    public static void refresh(){
+        RecyclerView rvLutemons = view.findViewById(R.id.rcvLutemons);
+        rvLutemons.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        rvLutemons.setAdapter(new LutemonRecyclerViewAdapter(view.getContext(), Storage.getInstance().getLutemons()));
     }
 
 }

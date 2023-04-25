@@ -43,7 +43,7 @@ public class Battle {
 
         switch (mode){
             case "Training":
-                enemy.setPlayerLutemon(new Lutemon("Cashbag","Cashbag",boost));
+                enemy.setPlayerLutemon(new Lutemon("Cashbag","Cashbag",boost,false));
                 break;
             case "RandomBattle":
                 enemy.setPlayerLutemon(new Lutemon(boost));

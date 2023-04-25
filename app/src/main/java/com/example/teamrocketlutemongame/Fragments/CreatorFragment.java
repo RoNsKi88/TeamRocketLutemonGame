@@ -155,6 +155,7 @@ public class CreatorFragment extends Fragment {
                         System.out.println(Color);
                         Lutemon Uusi = new Lutemon(Name, Color, 0, HC);
                         Storage.getInstance().addLutemon(Uusi);
+                        CollectionFragment.refresh();
 
                     }
                 });
