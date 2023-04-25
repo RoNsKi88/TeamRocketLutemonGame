@@ -2,13 +2,17 @@ package com.example.teamrocketlutemongame.Recyclerview;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.teamrocketlutemongame.Fragments.CollectionFragment;
+import com.example.teamrocketlutemongame.Fragments.MenuFragment;
 import com.example.teamrocketlutemongame.Lutemon;
 import com.example.teamrocketlutemongame.R;
+import com.example.teamrocketlutemongame.Storage;
 
 import java.util.ArrayList;
 
@@ -41,6 +45,20 @@ public class LutemonRecyclerViewAdapter extends RecyclerView.Adapter<LutemonRecy
         holder.special.setText(lutemon.getSpecial());
         holder.wins.setText(String.valueOf(lutemon.getWins()));
         holder.deaths.setText(String.valueOf(lutemon.getLosses()));
+
+        holder.lutemonFrame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Storage storage = Storage.getInstance();
+                Storage.getInstance().getLutemons().add(Storage.getInstance().getPlayer().getPlayerLutemon());
+                storage.getPlayer().setPlayerLutemon(storage.getLutemon(pos));
+                storage.removeLutemon(pos);
+                notifyDataSetChanged();
+                CollectionFragment.refresh();
+                MenuFragment.refresh();
+
+            }
+        });
 
 
     }
