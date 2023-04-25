@@ -1,6 +1,8 @@
 package com.example.teamrocketlutemongame;
 
-public class Specs {
+import java.io.Serializable;
+
+public class Specs implements Serializable {
     String name = "pekka";
     int wins = 0;
     int losses = 0;

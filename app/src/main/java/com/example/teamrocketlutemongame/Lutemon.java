@@ -2,11 +2,12 @@ package com.example.teamrocketlutemongame;
 
 import android.widget.ImageView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Lutemon extends Specs {
+public class Lutemon extends Specs implements Serializable {
     private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("Gray","Green","Orange","Pink","Rainbow","Cashbag"));
     private final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","Nuori osuja","Koodari","Lutesin Jäsen"));
 
