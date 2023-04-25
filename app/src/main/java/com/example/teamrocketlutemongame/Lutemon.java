@@ -4,16 +4,18 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Lutemon extends Specs {
     private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("gray","green","orange","pink","rainbow","cashbag"));
     private final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","Nuori osuja","Koodari","Lutesin Jäsen"));
 
-    private int attack = 10;
+    private int attack = 5;
     private int defence = 0;
-    private int maxHealth = 20;
+    private int maxHealth = 10;
     private int health = maxHealth;
+    private String special = "jumalanSiunaus";
     private static int id = 0;
 
     private int level = 1;
@@ -153,5 +155,16 @@ public class Lutemon extends Specs {
     public void resetHP(){
         health = maxHealth;
     }
-
+    public int getAtk(){
+        return attack;
+    }
+    public int getDef(){
+        return defence;
+    }
+    public String getSpecial(){
+        return special;
+    }
+    public int getImgFront(){
+        return imgFront;
+    }
 }

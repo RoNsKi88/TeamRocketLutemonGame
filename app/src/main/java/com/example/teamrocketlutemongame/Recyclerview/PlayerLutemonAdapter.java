@@ -9,17 +9,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.teamrocketlutemongame.Lutemon;
 import com.example.teamrocketlutemongame.R;
+import com.example.teamrocketlutemongame.Storage;
 
-import java.util.ArrayList;
-
-
-public class LutemonRecyclerViewAdapter extends RecyclerView.Adapter<LutemonRecyclerViewHolder> {
+public class PlayerLutemonAdapter extends RecyclerView.Adapter<LutemonRecyclerViewHolder>  {
     private Context context;
-    private ArrayList<Lutemon> lutemons;
+    private Lutemon lutemon;
 
-    public LutemonRecyclerViewAdapter(Context context, ArrayList<Lutemon> lutemons) {
+    public PlayerLutemonAdapter(Context context, Lutemon lutemon) {
         this.context = context;
-        this.lutemons = lutemons;
+        this.lutemon = lutemon;
     }
 
 
@@ -31,24 +29,18 @@ public class LutemonRecyclerViewAdapter extends RecyclerView.Adapter<LutemonRecy
 
     @Override
     public void onBindViewHolder(@NonNull LutemonRecyclerViewHolder holder, int position) {
-        int pos = holder.getAdapterPosition();
-        Lutemon lutemon = lutemons.get(pos);
+
+        holder.lutemonImg.setImageResource(lutemon.getImgFront());
         holder.lutemonName.setText(lutemon.getName());
-        holder.hp.setText(lutemon.getMaxHP());
-        holder.atk.setText(lutemon.getAtk());
-        holder.def.setText(lutemon.getDef());
+        holder.hp.setText(String.valueOf(lutemon.getMaxHP()));
+        holder.atk.setText(String.valueOf(lutemon.getAtk()));
+        holder.def.setText(String.valueOf(lutemon.getDef()));
         holder.special.setText(lutemon.getSpecial());
 
     }
 
     @Override
     public int getItemCount() {
-        return lutemons.size();
-    }
-
-
-
-    public void refresh(ArrayList<Lutemon> lutemons){
-        this.lutemons = lutemons;
+        return 1;
     }
 }

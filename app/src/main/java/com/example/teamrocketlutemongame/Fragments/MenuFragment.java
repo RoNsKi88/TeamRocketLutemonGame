@@ -3,12 +3,17 @@ package com.example.teamrocketlutemongame.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.teamrocketlutemongame.R;
+import com.example.teamrocketlutemongame.Recyclerview.LutemonRecyclerViewAdapter;
+import com.example.teamrocketlutemongame.Recyclerview.PlayerLutemonAdapter;
+import com.example.teamrocketlutemongame.Storage;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,9 +63,19 @@ public class MenuFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_menu, container, false);
+        RecyclerView shownLutemon = view.findViewById(R.id.selectedCharacterLutemon);
+        try {
+            shownLutemon.setLayoutManager(new LinearLayoutManager(view.getContext()));
+            shownLutemon.setAdapter(new PlayerLutemonAdapter(view.getContext(), Storage.getInstance().getPlayer().getPlayerLutemon()));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        return view;
     }
+
 }
