@@ -33,11 +33,13 @@ public class LutemonRecyclerViewAdapter extends RecyclerView.Adapter<LutemonRecy
     public void onBindViewHolder(@NonNull LutemonRecyclerViewHolder holder, int position) {
         int pos = holder.getAdapterPosition();
         Lutemon lutemon = lutemons.get(pos);
+        holder.lutemonImg.setImageResource(lutemon.getImgFront());
         holder.lutemonName.setText(lutemon.getName());
-        holder.hp.setText(lutemon.getMaxHP());
-        holder.atk.setText(lutemon.getAtk());
-        holder.def.setText(lutemon.getDef());
+        holder.hp.setText(String.valueOf(lutemon.getMaxHP()));
+        holder.atk.setText(String.valueOf(lutemon.getAtk()));
+        holder.def.setText(String.valueOf(lutemon.getDef()));
         holder.special.setText(lutemon.getSpecial());
+
 
     }
 

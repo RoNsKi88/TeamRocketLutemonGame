@@ -72,7 +72,7 @@
         app:layout_constraintStart_toStartOf="@+id/imgLutemon" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textCreateHP"
         android:layout_width="120dp"
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
@@ -81,33 +81,33 @@
         app:layout_constraintTop_toBottomOf="@+id/imgLutemon" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textCreateAttack"
         android:layout_width="120dp"
         android:layout_height="30dp"
         android:layout_marginTop="5dp"
         android:text="Attack"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        app:layout_constraintStart_toStartOf="@+id/textCreateHP"
+        app:layout_constraintTop_toBottomOf="@+id/textCreateHP" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textCreateSpecial"
         android:layout_width="120dp"
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:text="Jotain"
         app:layout_constraintEnd_toEndOf="@+id/imgLutemon"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toEndOf="@+id/textCreateHP"
         app:layout_constraintTop_toBottomOf="@+id/imgLutemon" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/textCreateDefence"
         android:layout_width="120dp"
         android:layout_height="30dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:text="Defence"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintStart_toEndOf="@+id/textCreateAttack"
+        app:layout_constraintTop_toBottomOf="@+id/textCreateSpecial" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

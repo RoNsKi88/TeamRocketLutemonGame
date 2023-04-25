@@ -145,7 +145,7 @@ public class CreatorFragment extends Fragment {
                         String Color = spinnerLutemons.getSelectedItem().toString();
                         Lutemon Uusi = new Lutemon(Name, Color, 0);
                         Storage.getInstance().addLutemon(Uusi);
-                        System.out.println("Loit Lutemonin " + Name + ", Onnea.");
+
 
 
 

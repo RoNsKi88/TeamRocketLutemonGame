@@ -33,6 +33,9 @@ public class Storage {
     }
     public void addLutemon(Lutemon lutemon){
         lutemons.add(lutemon);
+        for (Lutemon keppana:lutemons){
+            System.out.println(keppana.getName());
+        }
     }
     public void removeLutemon(int index){
         lutemons.remove(index);

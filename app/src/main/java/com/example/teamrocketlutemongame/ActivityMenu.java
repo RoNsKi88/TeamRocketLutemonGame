@@ -38,7 +38,7 @@ public class ActivityMenu extends AppCompatActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-
+                fragmentArea.setCurrentItem(tab.getPosition());
             }
         });
         fragmentArea.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

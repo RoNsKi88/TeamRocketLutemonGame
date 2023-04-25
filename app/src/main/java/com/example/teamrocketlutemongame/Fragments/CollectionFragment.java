@@ -20,6 +20,8 @@ import com.example.teamrocketlutemongame.Storage;
  * create an instance of this fragment.
  */
 public class CollectionFragment extends Fragment {
+    private LutemonRecyclerViewAdapter adapter;
+    private View porkkana;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -64,10 +66,18 @@ public class CollectionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_collection, container, false);
+        porkkana = view;
         RecyclerView rvLutemons = view.findViewById(R.id.rcvLutemons);
         rvLutemons.setLayoutManager(new LinearLayoutManager(view.getContext()));
         rvLutemons.setAdapter(new LutemonRecyclerViewAdapter(view.getContext(), Storage.getInstance().getLutemons()));
         // Inflate the layout for this fragment
         return view;
     }
+    @Override
+    public void onResume(){
+        super.onResume();
+        adapter = new LutemonRecyclerViewAdapter(porkkana.getContext(), Storage.getInstance().getLutemons());
+
+    }
+
 }
