@@ -12,23 +12,18 @@ import android.view.ViewGroup;
 
 import com.example.teamrocketlutemongame.R;
 import com.example.teamrocketlutemongame.Recyclerview.LutemonRecyclerViewAdapter;
+import com.example.teamrocketlutemongame.Recyclerview.PlayerLutemonAdapter;
 import com.example.teamrocketlutemongame.Storage;
 
 
 public class CollectionFragment extends Fragment {
-    private static CollectionFragment collectionFragment = null;
+
     private LutemonRecyclerViewAdapter adapter;
     private static View view;
 
 
-    private CollectionFragment() {
+    public CollectionFragment() {
         // Required empty public constructor
-    }
-    public static CollectionFragment getInstance(){
-        if (collectionFragment == null ){
-            collectionFragment = new CollectionFragment();
-        }
-        return collectionFragment;
     }
 
 
@@ -48,6 +43,10 @@ public class CollectionFragment extends Fragment {
         RecyclerView rvLutemons = view.findViewById(R.id.rcvLutemons);
         rvLutemons.setLayoutManager(new LinearLayoutManager(view.getContext()));
         rvLutemons.setAdapter(new LutemonRecyclerViewAdapter(view.getContext(), Storage.getInstance().getLutemons()));
+        RecyclerView shownLutemon = view.findViewById(R.id.selectedCharacterLutemon);
+        shownLutemon.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        shownLutemon.setAdapter(new PlayerLutemonAdapter(view.getContext(), Storage.getInstance().getPlayer().getPlayerLutemon()));
+
         // Inflate the layout for this fragment
         return view;
     }
@@ -61,6 +60,9 @@ public class CollectionFragment extends Fragment {
         RecyclerView rvLutemons = view.findViewById(R.id.rcvLutemons);
         rvLutemons.setLayoutManager(new LinearLayoutManager(view.getContext()));
         rvLutemons.setAdapter(new LutemonRecyclerViewAdapter(view.getContext(), Storage.getInstance().getLutemons()));
+        RecyclerView shownLutemon = view.findViewById(R.id.selectedCharacterLutemon);
+        shownLutemon.setLayoutManager(new LinearLayoutManager(view.getContext()));
+        shownLutemon.setAdapter(new PlayerLutemonAdapter(view.getContext(), Storage.getInstance().getPlayer().getPlayerLutemon()));
     }
 
 }

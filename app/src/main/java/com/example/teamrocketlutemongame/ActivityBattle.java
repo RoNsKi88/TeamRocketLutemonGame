@@ -122,6 +122,8 @@ public class ActivityBattle extends AppCompatActivity {
                             player.getPlayerLutemon().resetHP();
                             player.getPlayerLutemon().setLosses();
                             player.setLosses();
+                            player.setPlayerLutemon(Storage.getInstance().getLutemon(0));
+                            Storage.getInstance().removeLutemon(0);
                             Intent intent = new Intent(ActivityBattle.this,ActivityMenu.class);
                             startActivity(intent);
                         }

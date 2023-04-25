@@ -7,6 +7,7 @@
     android:padding="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lutemonFrame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#A1A1A1"
