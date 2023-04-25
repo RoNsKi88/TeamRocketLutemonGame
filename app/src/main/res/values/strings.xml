@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">TeamRocketLutemonGame</string>
+    <string-array name="Lutemons">
+        <item>Gray</item>
+        <item>Green</item>
+        <item>Orange</item>
+        <item>Pink</item>
+        <item>Rainbow</item>
+
+    </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

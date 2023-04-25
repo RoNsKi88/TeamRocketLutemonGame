@@ -23,7 +23,6 @@ public class ActivityBattle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
 
-
         battle = Battle.getInstace();
         player = battle.getPlayer();
         enemy = battle.getEnemy();

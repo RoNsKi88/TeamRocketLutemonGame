@@ -9,22 +9,22 @@
     <!-- TODO: Update blank fragment layout -->
 
     <EditText
-        android:id="@+id/CreateName"
-        android:layout_width="277dp"
+        android:id="@+id/txtInputName"
+        android:layout_width="0dp"
         android:layout_height="95dp"
         android:layout_marginTop="104dp"
         android:ems="10"
         android:hint="Give name here"
         android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/imgLutemon"
         app:layout_constraintHorizontal_bias="0.38"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CreateImage" />
+        app:layout_constraintStart_toStartOf="@+id/imgLutemon"
+        app:layout_constraintTop_toBottomOf="@+id/imgLutemon" />
 
     <ImageView
-        android:id="@+id/CreateImage"
+        android:id="@+id/imgLutemon"
         android:layout_width="250dp"
-        android:layout_height="200dp"
+        android:layout_height="250dp"
         android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
@@ -36,10 +36,12 @@
         android:id="@+id/CreateCb"
         android:layout_width="61dp"
         android:layout_height="54dp"
+        android:layout_marginTop="24dp"
         android:text="HC?"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/CreateName"
-        app:layout_constraintTop_toTopOf="@+id/CreateName" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtInputName"
+        app:layout_constraintTop_toBottomOf="@+id/txtInputName" />
 
     <Button
         android:id="@+id/CreateBtn"
@@ -61,75 +63,22 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/radioGroup"
-        android:layout_width="392dp"
-        android:layout_height="148dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="64dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CreateName">
-
-        <RadioButton
-            android:id="@+id/radioButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="5dp"
-            android:text="Nappi1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RadioButton
-            android:id="@+id/radioButton4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:text="Nappi4"
-            app:layout_constraintStart_toEndOf="@+id/radioButton3"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RadioButton
-            android:id="@+id/radioButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:text="Nappi3"
-            app:layout_constraintStart_toEndOf="@+id/radioButton2"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RadioButton
-            android:id="@+id/radioButton2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="5dp"
-            android:text="Nappi2"
-            app:layout_constraintStart_toEndOf="@+id/radioButton"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <RadioButton
-            android:id="@+id/radioButton5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="25dp"
-            android:text="Nappi5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioButton" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <Spinner
+        android:id="@+id/spinnerLutemons"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/imgLutemon"
+        app:layout_constraintEnd_toEndOf="@+id/imgLutemon"
+        app:layout_constraintStart_toStartOf="@+id/imgLutemon" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="120dp"
         android:layout_height="30dp"
-        android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:text="HP"
-        app:layout_constraintStart_toStartOf="@+id/CreateImage"
-        app:layout_constraintTop_toBottomOf="@+id/CreateImage" />
+        app:layout_constraintStart_toStartOf="@+id/imgLutemon"
+        app:layout_constraintTop_toBottomOf="@+id/imgLutemon" />
 
     <TextView
         android:id="@+id/textView3"
@@ -147,8 +96,9 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:text="Jotain"
+        app:layout_constraintEnd_toEndOf="@+id/imgLutemon"
         app:layout_constraintStart_toEndOf="@+id/textView2"
-        app:layout_constraintTop_toBottomOf="@+id/CreateImage" />
+        app:layout_constraintTop_toBottomOf="@+id/imgLutemon" />
 
     <TextView
         android:id="@+id/textView5"

@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Lutemon extends Specs {
-    private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("blue","white","red","yellow","rainbow","cashbag"));
+    private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("gray","green","orange","pink","rainbow","cashbag"));
     private final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","Nuori osuja","Koodari","Lutesin Jäsen"));
 
     private int attack = 10;
@@ -51,25 +51,25 @@ public class Lutemon extends Specs {
     private void addStats(String color){
 
         switch (color){
-            case "blue":
+            case "gray":
                 maxHealth += 10;
                 health = maxHealth;
-                imgFront = R.drawable.lute_front;
-                imgBack = R.drawable.lute_back;
+                imgFront = R.drawable.gray_front;
+                imgBack = R.drawable.gray_back;
                 break;
-            case "white":
+            case "green":
                 defence += 10;
-                imgFront = R.drawable.lute_front;
-                imgBack = R.drawable.lute_back;
+                imgFront = R.drawable.green_front;
+                imgBack = R.drawable.green_back;
                 break;
-            case "red":
+            case "orange":
                 attack += 10;
-                imgFront = R.drawable.lute_front;
-                imgBack = R.drawable.lute_back;
+                imgFront = R.drawable.orange_front;
+                imgBack = R.drawable.orange_back;
                 break;
-            case "yellow":
-                imgFront = R.drawable.lute_front;
-                imgBack = R.drawable.lute_back;
+            case "pink":
+                imgFront = R.drawable.pink_front;
+                imgBack = R.drawable.pink_back;
 
                 break;
             case "rainbow":
@@ -77,8 +77,8 @@ public class Lutemon extends Specs {
                 defence += 10;
                 maxHealth +=10;
                 health = maxHealth;
-                imgFront = R.drawable.lute_front;
-                imgBack = R.drawable.lute_back;
+                imgFront = R.drawable.rain_front;
+                imgBack = R.drawable.rain_back;
                 break;
             case "cashbag":
                 attack = 1;
