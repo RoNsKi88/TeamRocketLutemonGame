@@ -108,5 +108,17 @@
             app:layout_constraintBottom_toTopOf="@+id/rgGameMode"
             app:layout_constraintStart_toStartOf="@+id/rgGameMode" />
 
+        <TextView
+            android:id="@+id/txtImportantText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/selectedCharacterLutemon"
+            android:gravity="left"
+            android:paddingLeft="8dp"
+            android:text="CharactersLutemon"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/selectedCharacterLutemon"
+            app:layout_constraintTop_toTopOf="@+id/selectedCharacterLutemon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -96,6 +96,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:text="Jotain"
+        android:textSize="12dp"
         app:layout_constraintEnd_toEndOf="@+id/imgLutemon"
         app:layout_constraintStart_toEndOf="@+id/textCreateHP"
         app:layout_constraintTop_toBottomOf="@+id/imgLutemon" />

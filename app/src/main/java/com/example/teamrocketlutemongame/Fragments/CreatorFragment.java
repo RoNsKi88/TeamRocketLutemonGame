@@ -61,57 +61,53 @@ public class CreatorFragment extends Fragment {
         Button btnCreateLutemon = view.findViewById(R.id.CreateBtn);
         TextView TextviewName = view.findViewById(R.id.txtInputName);
         CheckBox cb = view.findViewById((R.id.CreateCb));
-        Boolean HC;
 
-        if (cb.isChecked()) {
-            HC = true;
-        }
-        else { HC = false;
-        }
+
+
 
         spinnerLutemons.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:
-                        System.out.println("00");
+
                         imgLutemon.setImageResource(R.drawable.gray_front);
-                        textviewHP.setText("HP: +10");
-                        textviewAttack.setText("ATT: -");
-                        textviewDefence.setText("DEF: -");
-                        textviewSpecial.setText("Special: -");
+                        textviewHP.setText("HP: 30");
+                        textviewAttack.setText("ATT: 5");
+                        textviewDefence.setText("DEF: 0");
+                        textviewSpecial.setText("Special: RollExtreDef");
                         break;
                     case 1:
-                        System.out.println("1");
+
                         imgLutemon.setImageResource(R.drawable.green_front);
-                        textviewHP.setText("HP: -");
-                        textviewAttack.setText("ATT: +5");
-                        textviewDefence.setText("DEF: -");
-                        textviewSpecial.setText("Special: -");
+                        textviewHP.setText("HP: 20");
+                        textviewAttack.setText("ATT: 5");
+                        textviewDefence.setText("DEF: 10");
+                        textviewSpecial.setText("IgnoreDmg");
                         break;
                     case 2:
-                        System.out.println("2");
+
                         imgLutemon.setImageResource(R.drawable.orange_front);
-                        textviewHP.setText("HP: -");
-                        textviewAttack.setText("ATT: -");
-                        textviewDefence.setText("DEF: -");
-                        textviewSpecial.setText("Special: Palava");
+                        textviewHP.setText("HP: 20");
+                        textviewAttack.setText("ATT: 15");
+                        textviewDefence.setText("DEF: 0");
+                        textviewSpecial.setText("Special: CritHitChange");
                         break;
                     case 3:
-                        System.out.println("3");
+
                         imgLutemon.setImageResource(R.drawable.pink_front);
-                        textviewHP.setText("HP: +5");
-                        textviewAttack.setText("ATT: +2");
-                        textviewDefence.setText("DEF: +1");
-                        textviewSpecial.setText("Special: Karvainen");
+                        textviewHP.setText("HP: 25");
+                        textviewAttack.setText("ATT: 7");
+                        textviewDefence.setText("DEF: 2");
+                        textviewSpecial.setText("Special: Leech");
                         break;
                     case 4:
-                        System.out.println("4");
+
                         imgLutemon.setImageResource(R.drawable.rain_front);
-                        textviewHP.setText("HP: +10");
-                        textviewAttack.setText("ATT: +5");
-                        textviewDefence.setText("DEF: +5");
-                        textviewSpecial.setText("Special: Mitä?");
+                        textviewHP.setText("HP: 30");
+                        textviewAttack.setText("ATT: 15");
+                        textviewDefence.setText("DEF: -10");
+                        textviewSpecial.setText("Nothing");
                         break;
                     default:
 
@@ -119,6 +115,12 @@ public class CreatorFragment extends Fragment {
                 btnCreateLutemon.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        Boolean HC;
+                        if (cb.isChecked()) {
+                            HC = true;
+                        }
+                        else { HC = false;
+                        }
 
                         String Name = TextviewName.getText().toString();
 

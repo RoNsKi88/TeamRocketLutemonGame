@@ -49,23 +49,5 @@ public class ActivityMenu extends AppCompatActivity {
             }
         });
 
-
-
-
-
-
-
-        /*btnStartBattle = findViewById(R.id.btnStartBattle);
-        btnStartBattle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                battle.getInstace().setBattle(Storage.getInstance().getPlayer());
-                Intent intent = new Intent(ActivityMenu.this,ActivityBattle.class);
-                startActivity(intent);
-            }
-        });
-
-*/
     }
 }

@@ -18,6 +18,7 @@ public class Battle {
     }
 
     public void setBattle(Character player,String mode,String difficulty) {
+        player.getPlayerLutemon().resetHP();
         this.player = player;
         String color;
         enemy = new Character("Enemy");
@@ -46,7 +47,7 @@ public class Battle {
                 enemy.setPlayerLutemon(new Lutemon("Cashbag","Cashbag",boost,false));
                 break;
             case "RandomBattle":
-                enemy.setPlayerLutemon(new Lutemon(boost));
+                enemy.setPlayerLutemon(new Lutemon("",boost));
                 break;
             default:
                 break;
@@ -65,7 +66,8 @@ public class Battle {
 
     public int attack(Character attacker,ImageView characterImage, float playerPosX, float playerPosY, float enemyPosX, float enemyPosY){
         int damage = attacker.getPlayerLutemon().makeAttack();
-        characterImage.animate().x(enemyPosX).setDuration(600);
+
+        characterImage.animate().x(enemyPosX).setDuration(400);
         characterImage.animate().y(enemyPosY);
         long lenOfAnimation = characterImage.animate().getDuration();
         Handler attackHandler = new Handler();
@@ -82,7 +84,7 @@ public class Battle {
                 characterImage.animate().x(playerPosX);
                 characterImage.animate().y(playerPosY);
             }
-        },lenOfAnimation-lenOfAnimation/5);
+        },lenOfAnimation-lenOfAnimation/3);
         return damage;
     }
 

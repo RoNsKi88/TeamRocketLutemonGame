@@ -29,14 +29,6 @@ public class ActivityStartMenu extends AppCompatActivity {
         btnSaveGame.setOnClickListener(listener);
         //btnDeleteSave.setOnClickListener(listener);
 
-        // Väliaikais ukkeli + lutemon luonti
-        Character character = new Character("matti");
-        character.setPlayerLutemon(new Lutemon("reiskaperäreikä","Rainbow",20, false));
-        System.out.println(character.getPlayerLutemon().getName()+"    ukon lutikka  "+ character.getPlayerLutemon().getColor()+ "    väri      "+"PERKELE TÄÄLLÄ ON PASKAA");
-
-        Storage.getInstance().setPlayer(character);
-
-
     }
     private View.OnClickListener listener = new View.OnClickListener() {
         @Override
@@ -44,15 +36,18 @@ public class ActivityStartMenu extends AppCompatActivity {
             Intent intent;
             switch (view.getId()){
                 case (R.id.btnNewGame):
+                    Storage.getInstance().getLutemons().clear();
+                    Storage.getInstance().setPlayer(new Character("SeikkailijaKeijo"));
+                    Storage.getInstance().getPlayer().setPlayerLutemon(new Lutemon("MaailmanMatkaaja","Orange",0,true));
                     intent = new Intent(ActivityStartMenu.this, ActivityMenu.class);
                     startActivity(intent);
                     break;
                 case (R.id.btnSaveGame):
-                    System.out.println("Joo!");
+
                     Storage.getInstance().saveLutemons(context);
                     break;
                 case (R.id.btnLoadGame):
-                    System.out.println("Apua!");
+
                     Storage.getInstance().loadLutemons(context);
                     intent = new Intent(ActivityStartMenu.this, ActivityMenu.class);
                     startActivity(intent);

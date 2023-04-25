@@ -30,7 +30,7 @@
             android:textSize="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imgrvImage"
-            app:layout_constraintTop_toTopOf="@+id/imgrvImage" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView6"
@@ -57,7 +57,7 @@
             android:id="@+id/textView8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="Attack:"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/textView6"
@@ -67,7 +67,7 @@
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="19dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:hint="Special"
             android:text="Special:"
             android:textStyle="bold"
@@ -88,9 +88,10 @@
             android:layout_width="wrap_content"
             android:layout_height="20dp"
             android:clickable="false"
+            android:layoutDirection="ltr"
             android:text="Hardcore"
             app:layout_constraintBottom_toBottomOf="@+id/textView4"
-            app:layout_constraintStart_toStartOf="@+id/textView8" />
+            app:layout_constraintStart_toStartOf="@+id/textView11" />
 
         <TextView
             android:id="@+id/txtrvLutemonDEF"
@@ -114,8 +115,12 @@
             android:id="@+id/txtrvLutemonSpecial"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="textImeMultiLine"
             android:text="TextView"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView9"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/txtrvLutemonDEF"
             app:layout_constraintTop_toTopOf="@+id/textView9" />
 
@@ -124,9 +129,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
+            android:layout_marginEnd="21dp"
             android:text="Wins:"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/textView9"
+            app:layout_constraintEnd_toEndOf="@+id/textView7"
+            app:layout_constraintStart_toStartOf="@+id/textView7"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
         <TextView
@@ -154,5 +161,22 @@
             android:text="TextView"
             app:layout_constraintStart_toStartOf="@+id/txtrvLutemonWins"
             app:layout_constraintTop_toTopOf="@+id/textView4" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LVL:"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/textView8"
+            app:layout_constraintTop_toTopOf="@+id/textView3" />
+
+        <TextView
+            android:id="@+id/txtrvLutemonLVL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            app:layout_constraintStart_toStartOf="@+id/txtrvLutemonATK"
+            app:layout_constraintTop_toTopOf="@+id/textView11" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

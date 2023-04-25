@@ -13,11 +13,11 @@ public class Lutemon extends Specs implements Serializable {
 
     private int attack = 5;
     private int defence = 0;
-    private int maxHealth = 10;
+    private int maxHealth = 20;
     private int health = maxHealth;
     private String special = "jumalanSiunaus";
     private static int id = 0;
-    private boolean Hardcore;
+    private boolean hardcore;
     private int level = 1;
     double lvlUP = 10;
     private float experience = 0;
@@ -28,15 +28,12 @@ public class Lutemon extends Specs implements Serializable {
         id = id++;
         this.name = name;
         this.color = color;
-        this.Hardcore = HC;
+        this.hardcore = HC;
         addStats(color);
-        if (color.equals("Cashbag")){
-            Random random = new Random();
-            this.name = enemyNames.get(random.nextInt(enemyNames.size()));
-        }
+
 
         for (int i=0;i<boost;i++){
-            if (color.equals("Cashbag")){
+            if (name.equals("Cashbag")){
                 maxHealth += i;
             }
             else{
@@ -46,11 +43,18 @@ public class Lutemon extends Specs implements Serializable {
         }
     }
 
-    public Lutemon(int boost) {
+    public Lutemon(String name,int boost) {
         Random random = new Random();
         color = colors.get(random.nextInt(colors.size()));
-        name = enemyNames.get(random.nextInt(enemyNames.size()));
+        if (name == "Cashbag" ) {
+            this.name = enemyNames.get(random.nextInt(enemyNames.size()));
+            color = "Cashbag";
+        }
+        else {
+            this.name = name;
+        }
         addStats(color);
+
         for (int i = 0;i<boost;i++){
             levelUp();
             level += 1;
@@ -64,29 +68,37 @@ public class Lutemon extends Specs implements Serializable {
                 health = maxHealth;
                 imgFront = R.drawable.gray_front;
                 imgBack = R.drawable.gray_back;
+                special = "RollExtreDef";
                 break;
             case "Green":
                 defence += 10;
                 imgFront = R.drawable.green_front;
                 imgBack = R.drawable.green_back;
+                special = "IgnoreDmg";
                 break;
             case "Orange":
                 attack += 10;
                 imgFront = R.drawable.orange_front;
                 imgBack = R.drawable.orange_back;
+                special = "CritHitChange";
                 break;
             case "Pink":
+                maxHealth += 5;
+                attack += 2;
+                defence += 2;
                 imgFront = R.drawable.pink_front;
                 imgBack = R.drawable.pink_back;
+                special = "Leech";
 
                 break;
             case "Rainbow":
                 attack += 10;
-                defence += 10;
+                defence += -10;
                 maxHealth +=10;
                 health = maxHealth;
                 imgFront = R.drawable.rain_front;
                 imgBack = R.drawable.rain_back;
+                special = "Nothing";
                 break;
             case "Cashbag":
                 attack = 1;
@@ -95,6 +107,7 @@ public class Lutemon extends Specs implements Serializable {
                 health = maxHealth;
                 imgFront = R.drawable.cash_bag;
                 imgBack = R.drawable.cash_bag;
+                special = "Just a CashBag";
 
             default:
         }
@@ -105,7 +118,6 @@ public class Lutemon extends Specs implements Serializable {
         if (experience > lvlUP){
             levelUp();
             level += 1;
-            System.out.println("levelUP!");
             experience = 0;
         }
     }
@@ -118,26 +130,33 @@ public class Lutemon extends Specs implements Serializable {
             switch (j){
                 case 0:
                     attack += 1;
-                    System.out.println("attacklvlup");
                     break;
                 case 1:
                     defence += 1;
-                    System.out.println("defencelvlup");
                     break;
                 case 2:
                     maxHealth += 1;
-                    System.out.println("maxhealthlvlup");
                     break;
             }
         }
     }
     public int makeAttack(){
         double damage = Math.random() * attack + 1;
+        double luku = Math.random();
+        if (luku < 0.1){    //Critical hit change.
+            System.out.println("Critical hit!");
+            damage = damage * 2;
+        }
         System.out.println("Damage number: "+ (int)damage);
         return (int) damage;
     }
     public int defend(int attack){
-        double damage = attack - (defence * Math.random());
+        double luku = Math.random();
+        if (luku < 0.02) {                                  //Dodge change
+            System.out.println("Vihollinen oli liian ketterä lyönnillesi!");
+            attack = 0;
+        }
+        double damage = attack - (defence * Math.random()); //Counts final damage after defending agaist attack
         if (damage < 0){
             damage = 0;
         }
@@ -172,5 +191,8 @@ public class Lutemon extends Specs implements Serializable {
     }
     public int getImgFront(){
         return imgFront;
+    }
+    public Boolean getHcStatus(){
+        return hardcore;
     }
 }

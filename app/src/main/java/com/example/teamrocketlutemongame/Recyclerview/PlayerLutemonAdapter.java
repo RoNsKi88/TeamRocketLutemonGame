@@ -38,11 +38,16 @@ public class PlayerLutemonAdapter extends RecyclerView.Adapter<LutemonRecyclerVi
         holder.special.setText(lutemon.getSpecial());
         holder.wins.setText(String.valueOf(lutemon.getWins()));
         holder.deaths.setText(String.valueOf(lutemon.getLosses()));
+        holder.lvl.setText(String.valueOf(lutemon.getLevel()));
+        if (Storage.getInstance().getPlayer().getPlayerLutemon().getHcStatus()==true){
+            holder.hcStatus.setChecked(true);
+        }
 
     }
 
     @Override
     public int getItemCount() {
         return 1;
+
     }
 }

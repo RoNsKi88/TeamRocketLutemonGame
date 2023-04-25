@@ -43,8 +43,10 @@ public class CollectionFragment extends Fragment {
         RecyclerView rvLutemons = view.findViewById(R.id.rcvLutemons);
         rvLutemons.setLayoutManager(new LinearLayoutManager(view.getContext()));
         rvLutemons.setAdapter(new LutemonRecyclerViewAdapter(view.getContext(), Storage.getInstance().getLutemons()));
+
         RecyclerView shownLutemon = view.findViewById(R.id.selectedCharacterLutemon);
         shownLutemon.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
         shownLutemon.setAdapter(new PlayerLutemonAdapter(view.getContext(), Storage.getInstance().getPlayer().getPlayerLutemon()));
 
         // Inflate the layout for this fragment
@@ -62,7 +64,9 @@ public class CollectionFragment extends Fragment {
         rvLutemons.setAdapter(new LutemonRecyclerViewAdapter(view.getContext(), Storage.getInstance().getLutemons()));
         RecyclerView shownLutemon = view.findViewById(R.id.selectedCharacterLutemon);
         shownLutemon.setLayoutManager(new LinearLayoutManager(view.getContext()));
+
         shownLutemon.setAdapter(new PlayerLutemonAdapter(view.getContext(), Storage.getInstance().getPlayer().getPlayerLutemon()));
+
     }
 
 }

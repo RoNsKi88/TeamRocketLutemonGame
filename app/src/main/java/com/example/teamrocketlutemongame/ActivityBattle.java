@@ -65,14 +65,7 @@ public class ActivityBattle extends AppCompatActivity {
                 damage = battle.attack(player,imgPlayer,playerPosX,playerPosY,enemyPosX,enemyPosY);
                 double luku = Math.random();
                 System.out.println(luku);
-                if (luku < 0.1){
-                    System.out.println("Critical hit!");
-                    damage = damage * 4;
-                } else if (luku > 0.98) {
-                    System.out.println("Vihollinen oli liian ketterä lyönnillesi!");
-                    damage = 0;
 
-                }
 
                 damage = enemy.getPlayerLutemon().defend(damage);
                 player.getPlayerLutemon().addXP(damage);
@@ -108,22 +101,26 @@ public class ActivityBattle extends AppCompatActivity {
                             startActivity(intent);
                         }
                     }
-                },1200);
-
+                },1000);
                 attackHandler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         btnAttack.setVisibility(View.VISIBLE);
                         if (player.getPlayerLutemon().getHP() > 0) {
-
                         }
                         else {
                             imgPlayer.animate().rotationX(-60);
                             player.getPlayerLutemon().resetHP();
                             player.getPlayerLutemon().setLosses();
                             player.setLosses();
-                            player.setPlayerLutemon(Storage.getInstance().getLutemon(0));
-                            Storage.getInstance().removeLutemon(0);
+                            if (player.getPlayerLutemon().getHcStatus()){
+                                if(Storage.getInstance().getLutemons().size() == 0){
+                                    player.setPlayerLutemon(new Lutemon("EasterEgg","Cashbag",50,true));
+                                }else {
+                                    player.setPlayerLutemon(Storage.getInstance().getLutemon(0));
+                                    Storage.getInstance().removeLutemon(0);
+                                }
+                            }
                             Intent intent = new Intent(ActivityBattle.this,ActivityMenu.class);
                             startActivity(intent);
                         }

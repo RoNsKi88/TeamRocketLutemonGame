@@ -45,12 +45,18 @@ public class LutemonRecyclerViewAdapter extends RecyclerView.Adapter<LutemonRecy
         holder.special.setText(lutemon.getSpecial());
         holder.wins.setText(String.valueOf(lutemon.getWins()));
         holder.deaths.setText(String.valueOf(lutemon.getLosses()));
+        holder.lvl.setText(String.valueOf(lutemon.getLevel()));
+        if (lutemon.getHcStatus() == true){
+            holder.hcStatus.setChecked(true);
+        }
 
         holder.lutemonFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Storage storage = Storage.getInstance();
+
                 Storage.getInstance().getLutemons().add(Storage.getInstance().getPlayer().getPlayerLutemon());
+
                 storage.getPlayer().setPlayerLutemon(storage.getLutemon(pos));
                 storage.removeLutemon(pos);
                 notifyDataSetChanged();
