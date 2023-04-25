@@ -17,11 +17,43 @@ public class Battle {
         return battle;
     }
 
-    public void setBattle(Character player) {
+    public void setBattle(Character player,String mode,String difficulty) {
         this.player = player;
+        String color;
+        enemy = new Character("Enemy");
         int boost = player.getPlayerLutemon().getLevel();
-        enemy = new Character("mulukku");
-        enemy.setPlayerLutemon(new Lutemon(boost));
+        double helperInt = boost;
+        switch (difficulty){
+            case "Easy":
+                helperInt *= 0.6;
+                break;
+            case "Normal":
+                helperInt *= 0.8;
+                break;
+            case "Hard":
+                helperInt = helperInt;
+                break;
+            case "Impossible":
+                helperInt *= 1.2;
+                break;
+            default:
+                boost = boost/4;
+        }
+        boost = (int)helperInt;
+
+        switch (mode){
+            case "Training":
+                enemy.setPlayerLutemon(new Lutemon("Cashbag","Cashbag",boost));
+                break;
+            case "RandomBattle":
+                enemy.setPlayerLutemon(new Lutemon(boost));
+                break;
+            default:
+                break;
+        }
+
+
+
         enemy.getPlayerLutemon().resetHP();
     }
     public Character getPlayer(){

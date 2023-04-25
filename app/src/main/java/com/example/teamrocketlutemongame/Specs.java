@@ -17,15 +17,15 @@ public class Specs {
         return wins;
     }
 
-    public void setWins(int wins) {
-        this.wins = wins;
+    public void setWins() {
+        this.wins += 1;
     }
 
     public int getLosses() {
         return losses;
     }
 
-    public void setLosses(int losses) {
-        this.losses = losses;
+    public void setLosses() {
+        this.losses += 1;
     }
 }

@@ -4,10 +4,11 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Random;
 
 public class Lutemon extends Specs {
-    private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("Gray","Green","Orange","Pink","Rainbow","Cashbag"));
+    private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("Gray","Green","Orange","Pink","Rainbow"));
     private final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","Nuori osuja","Koodari","Lutesin Jäsen"));
 
     private int attack = 5;
@@ -27,8 +28,13 @@ public class Lutemon extends Specs {
         id = id++;
         this.name = name;
         this.color = color;
-        addStats(color);
         this.Hardcore = HC;
+        addStats(color);
+        if (color.equals("Cashbag")){
+            Random random = new Random();
+            this.name = enemyNames.get(random.nextInt(enemyNames.size()));
+        }
+
         for (int i=0;i<boost;i++){
             if (color.equals("Cashbag")){
                 maxHealth += i;

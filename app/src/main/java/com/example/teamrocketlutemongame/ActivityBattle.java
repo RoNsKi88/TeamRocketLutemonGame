@@ -102,6 +102,8 @@ public class ActivityBattle extends AppCompatActivity {
                         else {
                             imgEnemy.animate().rotationX(60);
                             player.getPlayerLutemon().resetHP();
+                            player.getPlayerLutemon().setWins();
+                            player.setWins();
                             Intent intent = new Intent(ActivityBattle.this,ActivityMenu.class);
                             startActivity(intent);
                         }
@@ -118,6 +120,8 @@ public class ActivityBattle extends AppCompatActivity {
                         else {
                             imgPlayer.animate().rotationX(-60);
                             player.getPlayerLutemon().resetHP();
+                            player.getPlayerLutemon().setLosses();
+                            player.setLosses();
                             Intent intent = new Intent(ActivityBattle.this,ActivityMenu.class);
                             startActivity(intent);
                         }
