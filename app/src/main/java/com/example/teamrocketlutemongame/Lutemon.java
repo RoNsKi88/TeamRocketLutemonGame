@@ -4,7 +4,6 @@ import android.widget.ImageView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Random;
 
 public class Lutemon extends Specs {
@@ -17,20 +16,21 @@ public class Lutemon extends Specs {
     private int health = maxHealth;
     private String special = "jumalanSiunaus";
     private static int id = 0;
-
+    private boolean Hardcore;
     private int level = 1;
     double lvlUP = 10;
     private float experience = 0;
     private String color;
     int imgFront,imgBack;
 
-    public Lutemon(String name, String color,int boost) {
+    public Lutemon(String name, String color,int boost, boolean HC) {
         id = id++;
         this.name = name;
         this.color = color;
         addStats(color);
+        this.Hardcore = HC;
         for (int i=0;i<boost;i++){
-            if (color.equals("cashbag")){
+            if (color.equals("Cashbag")){
                 maxHealth += i;
             }
             else{

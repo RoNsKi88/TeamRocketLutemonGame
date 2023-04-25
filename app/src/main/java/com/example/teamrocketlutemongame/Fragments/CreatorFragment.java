@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -88,6 +89,14 @@ public class CreatorFragment extends Fragment {
         TextView textviewSpecial = view.findViewById(R.id.textCreateSpecial);
         Button btnCreateLutemon = view.findViewById(R.id.CreateBtn);
         TextView TextviewName = view.findViewById(R.id.txtInputName);
+        CheckBox cb = view.findViewById((R.id.CreateCb));
+        Boolean HC;
+
+        if (cb.isChecked()) {
+            HC = true;
+        }
+        else { HC = false;
+        }
 
         spinnerLutemons.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -144,11 +153,8 @@ public class CreatorFragment extends Fragment {
 
                         String Color = spinnerLutemons.getSelectedItem().toString();
                         System.out.println(Color);
-                        Lutemon Uusi = new Lutemon(Name, Color, 0);
+                        Lutemon Uusi = new Lutemon(Name, Color, 0, HC);
                         Storage.getInstance().addLutemon(Uusi);
-
-
-
 
                     }
                 });
