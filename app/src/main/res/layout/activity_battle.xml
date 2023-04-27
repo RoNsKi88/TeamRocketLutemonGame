@@ -97,6 +97,19 @@
         app:layout_constraintBottom_toTopOf="@+id/imgEnemy"
         app:layout_constraintStart_toStartOf="@+id/imgEnemy" />
 
+    <TextView
+        android:id="@+id/txtDamageNro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:text="666"
+        android:textColor="#FF0000"
+        android:textSize="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/winningScreen"
         android:layout_width="0dp"

@@ -17,7 +17,7 @@ public class ActivityBattle extends AppCompatActivity {
     private ImageView imgEnemy,imgPlayer;
     private Battle battle;
     private Button btnAttack, btnBackToMenu;
-    private TextView txtPlayerHP,txtEnemyHP,txtPlayerName, txtEnemyName,txtWinner;
+    private TextView txtPlayerHP,txtEnemyHP,txtPlayerName, txtEnemyName,txtWinner,txtDamageNumber;
     private int damage;
     private float playerPosX,playerPosY,enemyPosY,enemyPosX;
     private long animationTimer;
@@ -38,6 +38,7 @@ public class ActivityBattle extends AppCompatActivity {
         player.getPlayerLutemon().getColor();
         imgEnemy.setImageResource(enemy.getPlayerLutemon().imgFront);
         imgPlayer.setImageResource(player.getPlayerLutemon().imgBack);
+        txtDamageNumber = findViewById(R.id.txtDamageNro);
 
         winningScreen = findViewById(R.id.winningScreen);
         winningScreen.setVisibility(View.GONE);
@@ -88,7 +89,7 @@ public class ActivityBattle extends AppCompatActivity {
                 damage = player.getPlayerLutemon().makeAttack();
                 damage = enemy.getPlayerLutemon().defend(damage);
                 player.getPlayerLutemon().addXP(damage);
-                attackAnimation(player,imgPlayer,playerPosX,playerPosY,enemyPosX,enemyPosY);
+                attackAnimation(player,damage,imgPlayer,playerPosX,playerPosY,enemyPosX,enemyPosY);
                 if (player.getPlayerLutemon().getColor().equals("Pink")){
                     player.getPlayerLutemon().setHP((int)(damage*0.1));
                 }
@@ -98,7 +99,7 @@ public class ActivityBattle extends AppCompatActivity {
                 if (enemy.getPlayerLutemon().getHP() > 0) { //Enemy alive check.
                     damage = enemy.getPlayerLutemon().makeAttack();
                     damage = player.getPlayerLutemon().defend(damage);
-                    attackAnimation(enemy,imgEnemy, enemyPosX, enemyPosY, playerPosX, playerPosY);
+                    attackAnimation(enemy,damage,imgEnemy, enemyPosX, enemyPosY, playerPosX, playerPosY);
                     if (enemy.getPlayerLutemon().getColor().equals("Pink")){
                         enemy.getPlayerLutemon().setHP((int)(damage*0.1));
                     }
@@ -108,6 +109,7 @@ public class ActivityBattle extends AppCompatActivity {
                         @Override
                         public void run() {
                             imgEnemy.animate().rotationX(60);
+                            imgEnemy.animate().alpha(0).setDuration(1000);
                             if (!enemy.getPlayerLutemon().getColor().equals("Cashbag")){
                                 player.setWins();
                                 player.getPlayerLutemon().setWins();
@@ -128,7 +130,8 @@ public class ActivityBattle extends AppCompatActivity {
                         if (player.getPlayerLutemon().getHP() > 0) {    // if alive.
                             btnAttack.setVisibility(View.VISIBLE);
                         }
-                        else {                                          // else end combat.
+                        else {
+                            imgPlayer.animate().alpha(0).setDuration(1000);// else end combat.
                             imgPlayer.animate().rotationX(-60);    // rotates lutemon if dead
 
                             player.getPlayerLutemon().setLosses();
@@ -150,13 +153,14 @@ public class ActivityBattle extends AppCompatActivity {
                         }
                     }
                 },animationTimer);
-            }public void attackAnimation(Character attacker, ImageView characterImage, float attackerPosX, float attackerPosY, float defenderPosX, float defenderPosY){
+            }public void attackAnimation(Character attacker,int damage, ImageView characterImage, float attackerPosX, float attackerPosY, float defenderPosX, float defenderPosY){
+                characterImage.animate().setDuration(400);
 
 
                 attackHandler.postDelayed(new Runnable() {                  //attacker movement over opponent
                     @Override
                     public void run() {
-                        characterImage.animate().x(defenderPosX).y(defenderPosY).setDuration(10);
+                        characterImage.animate().x(defenderPosX).y(defenderPosY);
                     }
                 },animationTimer);
                 attackHandler.postDelayed(new Runnable() {                  //start animating flip half way to opponent
@@ -167,9 +171,21 @@ public class ActivityBattle extends AppCompatActivity {
                     }
                 },animationTimer + characterImage.animate().getDuration()/2);
                 animationTimer += characterImage.animate().getDuration();   //add delay for animations.
-                attackHandler.postDelayed(new Runnable() {                  //re position attacker to its start position.
+                attackHandler.postDelayed(new Runnable(){                  //re position attacker to its start position.
                     @Override
                     public void run() {
+                        txtDamageNumber.setText(String.valueOf(damage));
+                        txtDamageNumber.setX(defenderPosX);
+                        txtDamageNumber.setY(defenderPosY);
+                        txtDamageNumber.animate().alpha(1);
+                        attackHandler.postDelayed(new Runnable() {                  //re position attacker to its start position.
+                            @Override
+                            public void run() {
+                                txtDamageNumber.animate().alpha(0);
+                            }
+                        },txtDamageNumber.animate().getDuration());
+
+
                         characterImage.animate().x(attackerPosX).y(attackerPosY);
                     }
                 },animationTimer);

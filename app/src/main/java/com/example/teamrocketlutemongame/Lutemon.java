@@ -55,6 +55,10 @@ public class Lutemon extends Specs implements Serializable {
             color = "Cashbag";
         }
         else {
+            if (name.isEmpty()){
+
+                name = enemyNames.get(random.nextInt(enemyNames.size()));
+            }
             this.name = name;
         }
         addStats(color);
@@ -127,7 +131,7 @@ public class Lutemon extends Specs implements Serializable {
     }
     private void levelUp(){
         int j;
-        lvlUP *= 1.3;
+        lvlUP *= 1.2;
         for (int i = 0;i < level;i++){
             Random random = new Random();
             j = (int)(Math.random()*3);
@@ -195,7 +199,7 @@ public class Lutemon extends Specs implements Serializable {
             damage = 0;
         }
         System.out.println("lopullinen damage defencen jälkeen: "+(int)damage);
-        health -= damage;
+        health -= (int)damage;
         return (int) damage;
     }
 

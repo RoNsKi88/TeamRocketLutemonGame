@@ -39,7 +39,7 @@ public class Battle {
                 helperInt *= 1.2;
                 break;
             default:
-                boost = boost/4;
+                helperInt = boost/4;
         }
         boost = (int)helperInt;
 
