@@ -37,7 +37,7 @@ public class ActivityStartMenu extends AppCompatActivity {
             switch (view.getId()){
                 case (R.id.btnNewGame):
                     Storage.getInstance().getLutemons().clear();
-                    Storage.getInstance().setPlayer(new Character("SeikkailijaKeijo"));
+                    Storage.getInstance().setPlayer(new Character("LutemonMestari"));
                     Storage.getInstance().getPlayer().setPlayerLutemon(new Lutemon("MaailmanMatkaaja","Orange",0,true));
                     intent = new Intent(ActivityStartMenu.this, ActivityMenu.class);
                     startActivity(intent);
@@ -61,6 +61,4 @@ public class ActivityStartMenu extends AppCompatActivity {
 
         }
     };
-
-
 }
