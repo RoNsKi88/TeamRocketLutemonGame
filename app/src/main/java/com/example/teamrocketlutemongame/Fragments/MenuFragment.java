@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -15,6 +16,8 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.teamrocketlutemongame.ActivityBattle;
+import com.example.teamrocketlutemongame.ActivityMenu;
+import com.example.teamrocketlutemongame.ActivityStartMenu;
 import com.example.teamrocketlutemongame.Battle;
 import com.example.teamrocketlutemongame.R;
 import com.example.teamrocketlutemongame.Recyclerview.LutemonRecyclerViewAdapter;
@@ -47,6 +50,7 @@ public class MenuFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_menu, container, false);
 
         Button btnStartBattle = view.findViewById(R.id.btnStartBattle);
+        Button btnBackToStartMenu = view.findViewById(R.id.btnBackToStartMenu);
         RadioGroup rgGameMode = view.findViewById(R.id.rgGameMode);
         RadioGroup rgDifficulty = view.findViewById(R.id.radioGroup);
 
@@ -77,6 +81,14 @@ public class MenuFragment extends Fragment {
 
             }
         });
+        btnBackToStartMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(view.getContext(), ActivityStartMenu.class);
+                startActivity(intent);
+            }
+        });
+
 
 
         // Inflate the layout for this fragment

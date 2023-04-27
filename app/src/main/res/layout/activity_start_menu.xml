@@ -4,44 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#836E6E"
-    tools:context=".ActivityStartMenu">
+    android:background="@drawable/background_grass"
+    tools:context=".ActivityStartMenu"
+    >
 
-    <Button
-        android:id="@+id/btnDeleteSave"
-        android:layout_width="0dp"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:backgroundTint="#5A1212"
-        android:text="Delete Save"
-        android:textAppearance="@style/TextAppearance.AppCompat.Small"
-        android:typeface="monospace"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnSaveGame"
-        app:layout_constraintStart_toStartOf="@+id/btnSaveGame" />
+        app:srcCompat="@drawable/front_bage" />
 
     <Button
         android:id="@+id/btnLoadGame"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="42dp"
-        android:backgroundTint="#5A1212"
+        android:backgroundTint="#2F002AFF"
         android:text="Load Game"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:typeface="monospace"
         app:layout_constraintEnd_toEndOf="@+id/btnNewGame"
         app:layout_constraintStart_toStartOf="@+id/btnNewGame"
         app:layout_constraintTop_toBottomOf="@+id/btnNewGame" />
-
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:text="AutoSave"
-        app:layout_constraintBottom_toBottomOf="@+id/btnNewGame"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/btnNewGame"
-        app:layout_constraintTop_toTopOf="@+id/btnNewGame" />
 
     <Button
         android:id="@+id/btnNewGame"
@@ -50,7 +34,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="144dp"
-        android:backgroundTint="#5A1212"
+        android:backgroundTint="#2F002AFF"
         android:text="New Game"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:typeface="monospace"
@@ -64,7 +48,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="42dp"
-        android:backgroundTint="#5A1212"
+        android:backgroundTint="#2F002AFF"
         android:text="Save Game"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         android:typeface="monospace"

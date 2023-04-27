@@ -48,6 +48,7 @@ public class ActivityBattle extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 player.getPlayerLutemon().resetHP();
+                Storage.getInstance().saveLutemons(v.getContext());
                 Intent intent = new Intent(ActivityBattle.this,ActivityMenu.class);
                 startActivity(intent);
             }
