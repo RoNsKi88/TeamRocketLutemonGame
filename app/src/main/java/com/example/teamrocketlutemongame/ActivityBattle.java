@@ -108,7 +108,7 @@ public class ActivityBattle extends AppCompatActivity {
                         @Override
                         public void run() {
                             imgEnemy.animate().rotationX(60);
-                            if (!enemy.getPlayerLutemon().getName().equals("CashBag")){
+                            if (!enemy.getPlayerLutemon().getColor().equals("Cashbag")){
                                 player.setWins();
                                 player.getPlayerLutemon().setWins();
                             }
