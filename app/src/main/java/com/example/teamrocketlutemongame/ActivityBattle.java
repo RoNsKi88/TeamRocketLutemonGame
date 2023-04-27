@@ -85,8 +85,8 @@ public class ActivityBattle extends AppCompatActivity {
 
                 //player attack//
                 animationTimer = 0;
-                damage = player.getPlayerLutemon().makeAttack(player.getPlayerLutemon());
-                damage = enemy.getPlayerLutemon().defend(enemy.getPlayerLutemon(),damage);
+                damage = player.getPlayerLutemon().makeAttack();
+                damage = enemy.getPlayerLutemon().defend(damage);
                 player.getPlayerLutemon().addXP(damage);
                 attackAnimation(player,imgPlayer,playerPosX,playerPosY,enemyPosX,enemyPosY);
                 if (player.getPlayerLutemon().getColor().equals("Pink")){
@@ -96,15 +96,15 @@ public class ActivityBattle extends AppCompatActivity {
 
                 //enemy turn//
                 if (enemy.getPlayerLutemon().getHP() > 0) { //Enemy alive check.
-                    damage = enemy.getPlayerLutemon().makeAttack(enemy.getPlayerLutemon());
-                    damage = player.getPlayerLutemon().defend(player.getPlayerLutemon(),damage);
+                    damage = enemy.getPlayerLutemon().makeAttack();
+                    damage = player.getPlayerLutemon().defend(damage);
                     attackAnimation(enemy,imgEnemy, enemyPosX, enemyPosY, playerPosX, playerPosY);
                     if (enemy.getPlayerLutemon().getColor().equals("Pink")){
                         enemy.getPlayerLutemon().setHP((int)(damage*0.1));
                     }
                 }
                 else {                                      //if dead.
-                    attackHandler.postDelayed(new Runnable() {                  //attacker movement over opponent
+                    attackHandler.postDelayed(new Runnable() {                  //attacker movement over opponent with delay
                         @Override
                         public void run() {
                             imgEnemy.animate().rotationX(60);
@@ -129,7 +129,7 @@ public class ActivityBattle extends AppCompatActivity {
                             btnAttack.setVisibility(View.VISIBLE);
                         }
                         else {                                          // else end combat.
-                            imgPlayer.animate().rotationX(-60);
+                            imgPlayer.animate().rotationX(-60);    // rotates lutemon if dead
 
                             player.getPlayerLutemon().setLosses();
                             player.setLosses();

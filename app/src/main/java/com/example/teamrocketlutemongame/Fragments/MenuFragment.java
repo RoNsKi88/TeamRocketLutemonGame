@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,32 +15,27 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.teamrocketlutemongame.ActivityBattle;
-import com.example.teamrocketlutemongame.ActivityMenu;
 import com.example.teamrocketlutemongame.ActivityStartMenu;
 import com.example.teamrocketlutemongame.Battle;
 import com.example.teamrocketlutemongame.R;
-import com.example.teamrocketlutemongame.Recyclerview.LutemonRecyclerViewAdapter;
 import com.example.teamrocketlutemongame.Recyclerview.PlayerLutemonAdapter;
 import com.example.teamrocketlutemongame.Storage;
-
-import java.util.Random;
 
 
 public class MenuFragment extends Fragment {
     private static View view;
-
+    private RadioButton rbGameModeRandomBattle,rbGameModeTraining;
+    private RadioButton rbDifficultyEasy,rbDifficultyNormal,rbDifficultyHard,rbDifficultyImpossible;
+    private int difficultyMemory,gameModeMemory;
 
     public MenuFragment() {
         // Required empty public constructor
     }
 
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
         }
     }
 
@@ -51,16 +45,19 @@ public class MenuFragment extends Fragment {
 
         Button btnStartBattle = view.findViewById(R.id.btnStartBattle);
         Button btnBackToStartMenu = view.findViewById(R.id.btnBackToStartMenu);
+
         RadioGroup rgGameMode = view.findViewById(R.id.rgGameMode);
         RadioGroup rgDifficulty = view.findViewById(R.id.radioGroup);
 
+        rbGameModeRandomBattle = view.findViewById(R.id.rbRandomBattle);
+        rbGameModeTraining = view.findViewById(R.id.rbGameModeTraining);
 
-        RadioButton rbGameModeRandomBattle = view.findViewById(R.id.rbRandomBattle);
-        rbGameModeRandomBattle.setChecked(true);
-        RadioButton rbDifficultyNormal = view.findViewById(R.id.rbDifficultyNormal);
-        rbDifficultyNormal.setChecked(true);
+        rbDifficultyEasy = view.findViewById(R.id.rbDifficultyEasy);
+        rbDifficultyNormal = view.findViewById(R.id.rbDifficultyNormal);
+        rbDifficultyHard = view.findViewById(R.id.rbDifficultyHard);
+        rbDifficultyImpossible = view.findViewById(R.id.rbDifficultyImpossible);
 
-
+        activateRadioButtonsFromMemory();   // Memory for radiobuttons in menu fragmet
 
         RecyclerView shownLutemon = view.findViewById(R.id.selectedCharacterLutemon);
         shownLutemon.setLayoutManager(new LinearLayoutManager(view.getContext()));
@@ -69,6 +66,8 @@ public class MenuFragment extends Fragment {
         btnStartBattle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Storage.getInstance().gameModeMemory = rgGameMode.getCheckedRadioButtonId();
+                Storage.getInstance().difficultyMemory = rgDifficulty.getCheckedRadioButtonId();
                 RadioButton rb = view.findViewById(rgGameMode.getCheckedRadioButtonId());
                 String trainingMode = rb.getText().toString();
 
@@ -89,8 +88,6 @@ public class MenuFragment extends Fragment {
             }
         });
 
-
-
         // Inflate the layout for this fragment
         return view;
     }
@@ -99,6 +96,39 @@ public class MenuFragment extends Fragment {
         shownLutemon.setLayoutManager(new LinearLayoutManager(view.getContext()));
         shownLutemon.setAdapter(new PlayerLutemonAdapter(view.getContext(), Storage.getInstance().getPlayer().getPlayerLutemon()));
 
+    }
+    public void activateRadioButtonsFromMemory(){   // Memory for radiobuttons in menu fragmet
+        difficultyMemory = Storage.getInstance().difficultyMemory;
+        gameModeMemory = Storage.getInstance().gameModeMemory;
+
+        switch (gameModeMemory){
+            case (R.id.rbRandomBattle):
+                rbGameModeRandomBattle.setChecked(true);
+                break;
+            case (R.id.rbGameModeTraining):
+                rbGameModeTraining.setChecked(true);
+                break;
+            default:
+                rbGameModeRandomBattle.setChecked(true);
+                break;
+        }
+        switch (difficultyMemory){
+            case (R.id.rbDifficultyEasy):
+                rbDifficultyEasy.setChecked(true);
+                break;
+            case (R.id.rbDifficultyNormal):
+                rbDifficultyNormal.setChecked(true);
+                break;
+            case (R.id.rbDifficultyHard):
+                rbDifficultyHard.setChecked(true);
+                break;
+            case (R.id.rbDifficultyImpossible):
+                rbDifficultyImpossible.setChecked(true);
+                break;
+            default:
+                rbDifficultyNormal.setChecked(true);
+                break;
+        }
     }
 
 }
