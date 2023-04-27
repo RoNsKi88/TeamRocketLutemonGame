@@ -9,7 +9,11 @@ import java.util.Random;
 
 public class Lutemon extends Specs implements Serializable {
     private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("Gray","Green","Orange","Pink","Rainbow"));
-    private final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","Nuori osuja","Koodari","Lutesin Jäsen"));
+    public static final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","NuoriOsuja","Koodari","LutesinJäsen","Ruotsintentti","Matematiikantentti","Teppo Tarkka-ampuja","Mr Vac"));
+
+
+
+    public static final ArrayList<String> randomLutemonNames = new ArrayList<>(Arrays.asList("Jorma","Kaaleppi","Reiska","PatonkiAnneli","RoNsKi","Keijo","ErittäinKovaKivi!","KovinKivi","KumiTarzan"));
 
     private int attack = 5;
     private int defence = 0;
@@ -140,23 +144,54 @@ public class Lutemon extends Specs implements Serializable {
             }
         }
     }
-    public int makeAttack(){
+    public int makeAttack(Lutemon lutemon){
         double damage = Math.random() * attack + 1;
-        double luku = Math.random();
-        if (luku < 0.1){    //Critical hit change.
+        if (lutemon.getColor().equals("Rainbow")){
+            double extraRollDamage = Math.random() * attack + 1;
+            if(extraRollDamage > damage){
+                damage = extraRollDamage;
+            }
+        }
+        double randomNumber = Math.random();
+        double criticalHitChange;
+        if (lutemon.getColor().equals("Orange")){
+            criticalHitChange = 0.2;
+        }else {
+            criticalHitChange = 0.1;
+        }
+
+        if (randomNumber < criticalHitChange){    //Critical hit change.
             System.out.println("Critical hit!");
             damage = damage * 2;
         }
         System.out.println("Damage number: "+ (int)damage);
         return (int) damage;
     }
-    public int defend(int attack){
-        double luku = Math.random();
-        if (luku < 0.02) {                                  //Dodge change
+    public int defend(Lutemon lutemon,int attack){
+        double randomNumber = Math.random();
+        double defendChange = 0.02;
+        if (lutemon.getColor().equals("Green")){
+            defendChange = 0.1;
+        }
+        else {
+            defendChange = 0.02;
+        }
+        if (randomNumber < defendChange) {                                  //Dodge change
             System.out.println("Vihollinen oli liian ketterä lyönnillesi!");
             attack = 0;
         }
-        double damage = attack - (defence * Math.random()); //Counts final damage after defending agaist attack
+        double extraDefence = 0;
+        double defenceRoll = defence * Math.random();
+        if (lutemon.getColor().equals("Gray")){
+            System.out.println("Harmaa puolustaa!!");
+            extraDefence = defence * Math.random();
+            System.out.println("gray kyseessä"+extraDefence+ " "+defenceRoll);
+            if (extraDefence > defenceRoll){
+                defenceRoll = extraDefence;
+                System.out.println("extra defenceeee");
+            }
+        }
+        double damage = attack - defenceRoll; //Counts final damage after defending agaist attack
         if (damage < 0){
             damage = 0;
         }
@@ -173,6 +208,9 @@ public class Lutemon extends Specs implements Serializable {
     }
     public int getHP(){
         return health;
+    }
+    public void setHP(int amount){
+        health += amount;   // For pink lutemons leech ability. IT CAN GET HP OVER IT'S MAX HP
     }
     public int getMaxHP(){
         return maxHealth;
@@ -195,4 +233,5 @@ public class Lutemon extends Specs implements Serializable {
     public Boolean getHcStatus(){
         return hardcore;
     }
+
 }

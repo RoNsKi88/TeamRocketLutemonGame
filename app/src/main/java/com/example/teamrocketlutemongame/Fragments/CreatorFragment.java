@@ -22,6 +22,8 @@ import com.example.teamrocketlutemongame.Lutemon;
 import com.example.teamrocketlutemongame.R;
 import com.example.teamrocketlutemongame.Storage;
 
+import java.util.Random;
+
 
 public class CreatorFragment extends Fragment {
 
@@ -107,7 +109,7 @@ public class CreatorFragment extends Fragment {
                         textviewHP.setText("HP: 30");
                         textviewAttack.setText("ATT: 15");
                         textviewDefence.setText("DEF: -10");
-                        textviewSpecial.setText("Nothing");
+                        textviewSpecial.setText("RollExtraAtk");
                         break;
                     default:
 
@@ -123,11 +125,14 @@ public class CreatorFragment extends Fragment {
                         }
 
                         String Name = TextviewName.getText().toString();
+                        if (Name.isEmpty()){
+                            Random random = new Random();
+                            Name = Lutemon.randomLutemonNames.get(random.nextInt(Lutemon.randomLutemonNames.size()));
+                        }
 
                         String Color = spinnerLutemons.getSelectedItem().toString();
-                        System.out.println(Color);
-                        Lutemon Uusi = new Lutemon(Name, Color, 0, HC);
-                        Storage.getInstance().addLutemon(Uusi);
+                        Lutemon newLutemon = new Lutemon(Name, Color, 0, HC);
+                        Storage.getInstance().addLutemon(newLutemon);
                         CollectionFragment.refresh();
 
                     }

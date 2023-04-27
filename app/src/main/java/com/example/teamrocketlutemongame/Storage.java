@@ -61,7 +61,7 @@ public class Storage implements Serializable {
         System.out.println("Varastossa on tällä hetkellä seuraavat Lutemonit:");
 
         for (Lutemon keppana:lutemons){
-            System.out.println(keppana.getName());
+            System.out.println(keppana.getColor());
         }
     }
     public void removeLutemon(int index){

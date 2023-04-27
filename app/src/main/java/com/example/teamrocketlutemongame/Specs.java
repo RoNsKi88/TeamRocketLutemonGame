@@ -20,7 +20,7 @@ public class Specs implements Serializable {
     }
 
     public void setWins() {
-        this.wins += 1;
+        wins += 1;
     }
 
     public int getLosses() {

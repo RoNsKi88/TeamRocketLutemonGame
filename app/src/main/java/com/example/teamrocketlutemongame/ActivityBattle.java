@@ -85,28 +85,32 @@ public class ActivityBattle extends AppCompatActivity {
 
                 //player attack//
                 animationTimer = 0;
-                damage = player.getPlayerLutemon().makeAttack();
-                damage = enemy.getPlayerLutemon().defend(damage);
+                damage = player.getPlayerLutemon().makeAttack(player.getPlayerLutemon());
+                damage = enemy.getPlayerLutemon().defend(enemy.getPlayerLutemon(),damage);
                 player.getPlayerLutemon().addXP(damage);
                 attackAnimation(player,imgPlayer,playerPosX,playerPosY,enemyPosX,enemyPosY);
-
+                if (player.getPlayerLutemon().getColor().equals("Pink")){
+                    player.getPlayerLutemon().setHP((int)(damage*0.1));
+                }
                 //player attack ends//
 
                 //enemy turn//
                 if (enemy.getPlayerLutemon().getHP() > 0) { //Enemy alive check.
-                    damage = enemy.getPlayerLutemon().makeAttack();
-                    damage = player.getPlayerLutemon().defend(damage);
+                    damage = enemy.getPlayerLutemon().makeAttack(enemy.getPlayerLutemon());
+                    damage = player.getPlayerLutemon().defend(player.getPlayerLutemon(),damage);
                     attackAnimation(enemy,imgEnemy, enemyPosX, enemyPosY, playerPosX, playerPosY);
+                    if (enemy.getPlayerLutemon().getColor().equals("Pink")){
+                        enemy.getPlayerLutemon().setHP((int)(damage*0.1));
+                    }
                 }
                 else {                                      //if dead.
                     attackHandler.postDelayed(new Runnable() {                  //attacker movement over opponent
                         @Override
                         public void run() {
                             imgEnemy.animate().rotationX(60);
-
-                            player.getPlayerLutemon().setWins();
-                            if (enemy.getPlayerLutemon().getName() == "CashBag"){
+                            if (!enemy.getPlayerLutemon().getName().equals("CashBag")){
                                 player.setWins();
+                                player.getPlayerLutemon().setWins();
                             }
 
                             txtWinner.setText("You Win!");
@@ -152,7 +156,7 @@ public class ActivityBattle extends AppCompatActivity {
                 attackHandler.postDelayed(new Runnable() {                  //attacker movement over opponent
                     @Override
                     public void run() {
-                        characterImage.animate().x(defenderPosX).y(defenderPosY);
+                        characterImage.animate().x(defenderPosX).y(defenderPosY).setDuration(10);
                     }
                 },animationTimer);
                 attackHandler.postDelayed(new Runnable() {                  //start animating flip half way to opponent

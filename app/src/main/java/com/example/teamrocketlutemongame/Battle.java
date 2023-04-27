@@ -18,11 +18,12 @@ public class Battle {
     }
 
     public void setBattle(Character player,String mode,String difficulty) {
+        System.out.println(player.getWins());
         player.getPlayerLutemon().resetHP();
         this.player = player;
         String color;
         enemy = new Character("Enemy");
-        int boost = player.getPlayerLutemon().getLevel();
+        int boost = player.getWins();
         double helperInt = boost;
         switch (difficulty){
             case "Easy":
