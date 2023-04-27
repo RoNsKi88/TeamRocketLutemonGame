@@ -44,10 +44,8 @@ public class GraveyardFragment extends Fragment {
         rvLutemons.setLayoutManager(new LinearLayoutManager(view.getContext()));
         rvLutemons.setAdapter(new LutemonRecyclerViewAdapter(view.getContext(), Storage.getInstance().getDeadlutemons()));
 
-        RecyclerView shownLutemon = view.findViewById(R.id.selectedCharacterLutemon);
-        shownLutemon.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        shownLutemon.setAdapter(new PlayerLutemonAdapter(view.getContext(), Storage.getInstance().getPlayer().getPlayerLutemon()));
+
 
         // Inflate the layout for this fragment
         return view;
@@ -62,10 +60,7 @@ public class GraveyardFragment extends Fragment {
         RecyclerView rvLutemons = view.findViewById(R.id.rcvLutemons);
         rvLutemons.setLayoutManager(new LinearLayoutManager(view.getContext()));
         rvLutemons.setAdapter(new LutemonRecyclerViewAdapter(view.getContext(), Storage.getInstance().getDeadlutemons()));
-        RecyclerView shownLutemon = view.findViewById(R.id.selectedCharacterLutemon);
-        shownLutemon.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
-        shownLutemon.setAdapter(new PlayerLutemonAdapter(view.getContext(), Storage.getInstance().getPlayer().getPlayerLutemon()));
 
     }
 }

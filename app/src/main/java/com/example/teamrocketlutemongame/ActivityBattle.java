@@ -134,7 +134,7 @@ public class ActivityBattle extends AppCompatActivity {
 
                             if (player.getPlayerLutemon().getHcStatus()){   // if lutemon has hc status
                                 txtWinner.setText("You Lose! "+player.getPlayerLutemon().getName()+" is dead :'(");
-                                // TODO lisää tänne kuolleiden listaan lisäys
+                                Storage.getInstance().addDeadLutemon(player.getPlayerLutemon());
                                 if(Storage.getInstance().getLutemons().size() == 0){
                                     player.setPlayerLutemon(new Lutemon("EasterEgg","Cashbag",50,true));
                                 }else {

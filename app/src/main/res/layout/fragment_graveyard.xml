@@ -4,33 +4,25 @@
     android:id="@+id/frameLayoutListView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.CollectionFragment">
+    tools:context=".Fragments.CollectionFragment"
+    android:background="@drawable/rain_front">
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="0dp"
+        android:gravity="center"
+        android:text="Rest In peace in forever sleep" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvLutemons"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/textView5"
 
-        android:layout_above="@+id/selectedCharacterLutemon"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/selectedCharacterLutemon"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_alignParentBottom="true"
-        >
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <TextView
-        android:id="@+id/txtImportantText"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="left"
-        android:paddingLeft="8dp"
-        android:layout_alignTop="@id/selectedCharacterLutemon"
-        android:text="CharactersLutemon"
-        android:textSize="16dp"
-        android:textStyle="bold" />
+        />
 
 </RelativeLayout>
