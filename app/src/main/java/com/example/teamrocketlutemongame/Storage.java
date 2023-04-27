@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class Storage implements Serializable {
     private Character player;
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
+    private ArrayList<Lutemon> deadlutemons = new ArrayList<>();
     private static Storage storage = null;
 
     private Storage(){
@@ -28,18 +29,37 @@ public class Storage implements Serializable {
         return player;
     }
     public void setPlayer(Character player) {
-        System.out.println(player);
+        // System.out.println(player);
         this.player = player;
     }
 
     public ArrayList<Lutemon> getLutemons(){
         return lutemons;
     }
+
+    public ArrayList<Lutemon> getDeadlutemons() {
+        return deadlutemons;
+    }
+    public Lutemon getDeadLutemon(int index){
+        return deadlutemons.get(index);
+    }
+
     public Lutemon getLutemon(int index){
         return lutemons.get(index);
     }
+
+    public void addDeadLutemon(Lutemon lutemon) {
+        System.out.println("Following Lutemons are lost forever:");
+        deadlutemons.add(lutemon);
+        for (Lutemon keppana:deadlutemons){
+            System.out.println(keppana.getName());
+        }
+    }
+
     public void addLutemon(Lutemon lutemon){
         lutemons.add(lutemon);
+        System.out.println("Varastossa on tällä hetkellä seuraavat Lutemonit:");
+
         for (Lutemon keppana:lutemons){
             System.out.println(keppana.getName());
         }
@@ -53,9 +73,9 @@ public class Storage implements Serializable {
             ObjectOutputStream LutemonWriter = new ObjectOutputStream(context.openFileOutput("Lutemons.data", Context.MODE_PRIVATE));
             LutemonWriter.writeObject(Storage.getInstance());
             LutemonWriter.close();
-            System.out.println("Saving Data has Succeeded, i thinks!");
+            System.out.println("Saving Dada has Succeeded, i thinks!");
         } catch (IOException e) {
-            System.out.println("Saving Data has failed");
+            System.out.println("Saving Dada has failed, please contact support for more help.");
         }
     }
 

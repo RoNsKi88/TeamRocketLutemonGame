@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayoutListView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragments.CollectionFragment">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvLutemons"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        android:layout_above="@+id/selectedCharacterLutemon"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/selectedCharacterLutemon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/txtImportantText"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="left"
+        android:paddingLeft="8dp"
+        android:layout_alignTop="@id/selectedCharacterLutemon"
+        android:text="CharactersLutemon"
+        android:textSize="16dp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

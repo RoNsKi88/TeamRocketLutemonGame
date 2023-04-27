@@ -45,22 +45,12 @@
 
     <Button
         android:id="@+id/CreateBtn"
-        android:layout_width="166dp"
-        android:layout_height="67dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
         android:layout_marginBottom="4dp"
         android:text="Create This Lutemon"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.455"
-        app:layout_constraintStart_toEndOf="@+id/CreateBack" />
-
-    <Button
-        android:id="@+id/CreateBack"
-        android:layout_width="117dp"
-        android:layout_height="74dp"
-        android:layout_marginStart="16dp"
-        android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Spinner

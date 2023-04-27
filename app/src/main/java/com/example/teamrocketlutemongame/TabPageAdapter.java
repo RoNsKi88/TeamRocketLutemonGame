@@ -9,6 +9,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.example.teamrocketlutemongame.Fragments.CollectionFragment;
 import com.example.teamrocketlutemongame.Fragments.CreatorFragment;
+import com.example.teamrocketlutemongame.Fragments.GraveyardFragment;
 import com.example.teamrocketlutemongame.Fragments.MenuFragment;
 
 public class TabPageAdapter extends FragmentStateAdapter {
@@ -30,6 +31,8 @@ public class TabPageAdapter extends FragmentStateAdapter {
                 return new CollectionFragment();
             case 2:
                 return new CreatorFragment();
+            case 3:
+                return new GraveyardFragment();
             default:
                 return new MenuFragment();
         }
@@ -37,6 +40,6 @@ public class TabPageAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 }
