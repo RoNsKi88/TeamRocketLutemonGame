@@ -64,28 +64,6 @@ public class Battle {
         return enemy;
     }
 
-    public int attack(Character attacker,ImageView characterImage, float playerPosX, float playerPosY, float enemyPosX, float enemyPosY){
-        int damage = attacker.getPlayerLutemon().makeAttack();
 
-        characterImage.animate().x(enemyPosX).setDuration(400);
-        characterImage.animate().y(enemyPosY);
-        long lenOfAnimation = characterImage.animate().getDuration();
-        Handler attackHandler = new Handler();
-
-        attackHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                characterImage.animate().rotationXBy(360);
-            }
-        },lenOfAnimation/2);
-        attackHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                characterImage.animate().x(playerPosX);
-                characterImage.animate().y(playerPosY);
-            }
-        },lenOfAnimation-lenOfAnimation/3);
-        return damage;
-    }
 
 }

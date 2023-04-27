@@ -14,7 +14,7 @@
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@drawable/lute_back" />
+        tools:srcCompat="@drawable/rain_back" />
 
     <ProgressBar
         android:id="@+id/progressBarPlayer"
@@ -34,7 +34,7 @@
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/lute_front" />
+        tools:srcCompat="@drawable/rain_front" />
 
     <ProgressBar
         android:id="@+id/progressBarEnemy"
@@ -96,5 +96,43 @@
         android:text="TextView"
         app:layout_constraintBottom_toTopOf="@+id/imgEnemy"
         app:layout_constraintStart_toStartOf="@+id/imgEnemy" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/winningScreen"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/txtPlayerHP"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgEnemy"
+        app:layout_constraintVertical_bias="0.78"
+        tools:visibility="visible">
+
+        <Button
+            android:id="@+id/btnBackToMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Back To Menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.7" />
+
+        <TextView
+            android:id="@+id/txtWinnerLoser"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:gravity="center"
+            android:hint="Winner"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/btnBackToMenu"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
