@@ -4,7 +4,8 @@
     android:id="@+id/frameLayoutListView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.CollectionFragment">
+    tools:context=".Fragments.CollectionFragment"
+    android:background="@drawable/graveyard">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvLutemons"
