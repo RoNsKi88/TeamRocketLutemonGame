@@ -14,6 +14,7 @@ public class Storage implements Serializable {
     private ArrayList<Lutemon> lutemons = new ArrayList<>();
     private ArrayList<Lutemon> deadlutemons = new ArrayList<>();
     private static Storage storage = null;
+    public int difficultyMemory,gameModeMemory;
 
     private Storage(){
 

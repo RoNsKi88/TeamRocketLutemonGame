@@ -80,13 +80,13 @@
                 android:text="Normal" />
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/rbDifficultyHard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Hard" />
 
             <RadioButton
-                android:id="@+id/radioButton4"
+                android:id="@+id/rbDifficultyImpossible"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Impossible" />

@@ -144,9 +144,10 @@ public class Lutemon extends Specs implements Serializable {
             }
         }
     }
-    public int makeAttack(Lutemon lutemon){
+    public int makeAttack(){
         double damage = Math.random() * attack + 1;
-        if (lutemon.getColor().equals("Rainbow")){
+        if (getColor().equals("Rainbow")){
+            System.out.println("tämä on testi");
             double extraRollDamage = Math.random() * attack + 1;
             if(extraRollDamage > damage){
                 damage = extraRollDamage;
@@ -154,7 +155,7 @@ public class Lutemon extends Specs implements Serializable {
         }
         double randomNumber = Math.random();
         double criticalHitChange;
-        if (lutemon.getColor().equals("Orange")){
+        if (getColor().equals("Orange")){
             criticalHitChange = 0.2;
         }else {
             criticalHitChange = 0.1;
@@ -167,22 +168,20 @@ public class Lutemon extends Specs implements Serializable {
         System.out.println("Damage number: "+ (int)damage);
         return (int) damage;
     }
-    public int defend(Lutemon lutemon,int attack){
+    public int defend(int attack){
         double randomNumber = Math.random();
         double defendChange = 0.02;
-        if (lutemon.getColor().equals("Green")){
+        if (getColor().equals("Green")){
             defendChange = 0.1;
         }
-        else {
-            defendChange = 0.02;
-        }
+
         if (randomNumber < defendChange) {                                  //Dodge change
             System.out.println("Vihollinen oli liian ketterä lyönnillesi!");
             attack = 0;
         }
         double extraDefence = 0;
         double defenceRoll = defence * Math.random();
-        if (lutemon.getColor().equals("Gray")){
+        if (getColor().equals("Gray")){
             System.out.println("Harmaa puolustaa!!");
             extraDefence = defence * Math.random();
             System.out.println("gray kyseessä"+extraDefence+ " "+defenceRoll);
