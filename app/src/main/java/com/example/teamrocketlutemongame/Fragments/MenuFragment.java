@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.example.teamrocketlutemongame.ActivityBattle;
 import com.example.teamrocketlutemongame.ActivityMenu;
@@ -29,6 +30,7 @@ import java.util.Random;
 
 public class MenuFragment extends Fragment {
     private static View view;
+    TextView Textview1, Textview2, Textview3;
 
 
     public MenuFragment() {
@@ -48,6 +50,12 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_menu, container, false);
+        Textview1 = view.findViewById(R.id.txtPlayerStats);
+        Textview2 = view.findViewById(R.id.txtPlayerWins);
+        Textview3 = view.findViewById(R.id.txtPlayerLosses);
+
+        Textview2.setText("Wins: " + Storage.getInstance().getPlayer().getWins());
+        Textview3.setText("Losses: " + Storage.getInstance().getPlayer().getLosses());
 
         Button btnStartBattle = view.findViewById(R.id.btnStartBattle);
         Button btnBackToStartMenu = view.findViewById(R.id.btnBackToStartMenu);

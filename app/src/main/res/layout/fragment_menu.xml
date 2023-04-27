@@ -22,10 +22,10 @@
 
         <Button
             android:id="@+id/btnBackToStartMenu"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
+            android:layout_width="95dp"
+            android:layout_height="75dp"
             android:layout_marginTop="32dp"
-            android:text="StartMenu"
+            android:text="Start Menu"
             app:layout_constraintEnd_toEndOf="@+id/btnStartBattle"
             app:layout_constraintStart_toStartOf="@+id/btnStartBattle"
             app:layout_constraintTop_toBottomOf="@+id/btnStartBattle" />
@@ -120,6 +120,31 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/selectedCharacterLutemon"
             app:layout_constraintTop_toTopOf="@+id/selectedCharacterLutemon" />
+
+        <TextView
+            android:id="@+id/txtPlayerStats"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:text="Player Stats"
+            app:layout_constraintBottom_toTopOf="@+id/txtImportantText"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/txtPlayerWins"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Wins: "
+            app:layout_constraintBottom_toTopOf="@+id/selectedCharacterLutemon"
+            app:layout_constraintEnd_toStartOf="@+id/txtPlayerLosses"
+            app:layout_constraintStart_toEndOf="@+id/txtPlayerStats" />
+
+        <TextView
+            android:id="@+id/txtPlayerLosses"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="Losses: "
+            app:layout_constraintBottom_toTopOf="@+id/selectedCharacterLutemon"
+            app:layout_constraintEnd_toEndOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
