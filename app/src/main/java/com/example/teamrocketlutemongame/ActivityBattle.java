@@ -3,14 +3,17 @@ package com.example.teamrocketlutemongame;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.teamrocketlutemongame.Lutemons.CashBag;
 import com.example.teamrocketlutemongame.Lutemons.Pink;
@@ -28,12 +31,14 @@ public class ActivityBattle extends AppCompatActivity {
     private Handler attackHandler = new Handler();
     private ConstraintLayout winningScreen;
     private double xpMultiplier;
+    private Context context;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
+        context = ActivityBattle.this;
         xpMultiplier = Battle.getInstace().xpMultiplied;
 
         battle = Battle.getInstace();
@@ -108,7 +113,11 @@ public class ActivityBattle extends AppCompatActivity {
                     int hpLeft = enemy.getPlayerLutemon().getHP();
 
 
-                    player.getPlayerLutemon().addXP(damage * xpMultiplier);
+                    if(player.getPlayerLutemon().addXP(damage * xpMultiplier)){
+                        Toast toast = Toast.makeText(context,"LevelUP!!!!!",Toast.LENGTH_LONG);
+                        toast.setGravity(Gravity.CENTER,0,0);
+                        toast.show();
+                    }
                     animationTimer = attackAnimation(player, txtEnemyHP, damage, hpLeft, enemyMaxHP, imgPlayer, progressBarEnemy, playerPosX, playerPosY, enemyPosX, enemyPosY);
                     if (player.getPlayerLutemon() instanceof Pink) { // pinks Speciality
                         player.getPlayerLutemon().setHP((int) (damage * 0.1));
@@ -133,6 +142,16 @@ public class ActivityBattle extends AppCompatActivity {
                                 if (!enemy.getPlayerLutemon().getColor().equals("Cashbag")) {
                                     player.setWins();
                                     player.getPlayerLutemon().setWins();
+                                }else{
+                                    player.setTrainingDays();
+                                    if(player.getTrainingDays() == 1){
+                                        Toast toast = Toast.makeText(ActivityBattle.this,"Onneksiolkoon! Löysit easterEgin!\nYllätys lisätty varastoon!",Toast.LENGTH_LONG);
+                                        toast.setGravity(Gravity.CENTER,0,0);
+                                        toast.show();
+                                        Lutemon easterEggCashBag = new CashBag("MinunRahet",true);
+                                        easterEggCashBag.attack += 100;
+                                        Storage.getInstance().addLutemon(easterEggCashBag);
+                                    }
                                 }
 
                                 txtWinner.setText("You Win!");

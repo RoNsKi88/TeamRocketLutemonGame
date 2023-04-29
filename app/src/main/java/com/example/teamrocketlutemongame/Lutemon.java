@@ -1,5 +1,9 @@
 package com.example.teamrocketlutemongame;
 
+import android.content.Context;
+import android.view.Gravity;
+import android.widget.Toast;
+
 import com.example.teamrocketlutemongame.Lutemons.CashBag;
 import com.example.teamrocketlutemongame.Lutemons.Gray;
 import com.example.teamrocketlutemongame.Lutemons.Green;
@@ -16,7 +20,7 @@ public class Lutemon extends Specs implements Serializable {
     protected static final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","NuoriOsuja","Koodari","LutesinJäsen","Ruotsintentti","Matematiikantentti","Teppo Tarkka-ampuja","Mr Vac"));
     protected static final ArrayList<String> randomLutemonNames = new ArrayList<>(Arrays.asList("Jorma","Kaaleppi","Reiska","PatonkiAnneli","RoNsKi","Keijo","ErittäinKovaKivi!","KovinKivi","KumiTarzan"));
     protected int attack = 10,defence = 10,maxHealth = 10,health = maxHealth,level = 1,experience,imgFront,imgBack;
-    private double lvlUp = 1.2;
+    protected double lvlUp = 1.2;
     protected String special;
     private static int id = 0;
     protected boolean hardcore;
@@ -34,43 +38,40 @@ public class Lutemon extends Specs implements Serializable {
     }
     public void boost(int boost){
         for (int i=0;i<boost;i++){
-            if (this instanceof CashBag){// if creating training enemy levels only health.
-                level += 1;
-                for (int j = 0;j < level;j++){
-                    System.out.println("Cashbagin levutus");
-                    maxHealth += 2;
-                }
-            }else{
-                levelUp();
-            }
+            levelUp();
+
         }
     }
 
-    public void addXP(double points){
+    public boolean addXP(double points){
         experience += points;
+        boolean condition = false;
         if (experience > lvlUp){
+            condition = true;
             levelUp();
             experience = 0;
         }
+        return condition;
     }
     protected void levelUp(){
         int j;
+
         level += 1;
         lvlUp *= 1.4;
-        for (int i = 0;i < level;i++){
+        for (int i = 0;i < level;i++){  // lutemon gets bonus attributes eguals to its own level
             j = (int)(Math.random()*3);
             switch (j){
                 case 0:
                     attack += 1;
-                    System.out.println("Lvl up, you gain +1 att");
+                    //System.out.println("Lvl up, you gain +1 att");
                     break;
                 case 1:
                     defence += 1;
-                    System.out.println("Lvl up, you gain +1 def");
+                    //System.out.println("Lvl up, you gain +1 def");
                     break;
                 case 2:
                     maxHealth += 2;
-                    System.out.println("Lvl up, you gain +2 hp");
+                    //System.out.println("Lvl up, you gain +2 hp");
                     break;
             }
         }
@@ -102,32 +103,26 @@ public class Lutemon extends Specs implements Serializable {
     }
     public int defend(int attack){
         double randomNumber = Math.random();
-        double defendChange = 0.02;
+        double defendChance = 0.02;
         if (this instanceof Green){ //green has bigger change to ignore all damage.
-            defendChange = 0.1;
+            defendChance = 0.1;
         }
-        if (randomNumber < defendChange) {                                  //Dodge change
-            System.out.println("Vihollinen oli liian ketterä lyönnillesi!");
+        if (randomNumber < defendChance) {                                  //Dodge change
             attack = 0;
         }
         double extraDefence = 0;
         double defenceRoll = defence * Math.random();
         if (this instanceof Gray){  // grey gets 2 rolls for defence. only bigger roll is counted.
             extraDefence = defence * Math.random();
-            System.out.println("gray kyseessä"+extraDefence+ " "+defenceRoll);
             if (extraDefence > defenceRoll){
                 defenceRoll = extraDefence;
-                System.out.println("extra defenceeee");
             }
         }
         double damage = attack - defenceRoll; //Counts final damage after defending agaist attack
         if (damage < 0){
             damage = 0;
         }
-        if(this instanceof Pixeli){ //Pixels special. takes only half damage.
-            damage /= 2;
-        }
-        System.out.println("lopullinen damage defencen jälkeen: "+(int)damage);
+
         health -= (int)damage;
         return (int) damage;
     }

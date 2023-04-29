@@ -17,4 +17,6 @@ public class Pink extends Lutemon {
         special = "Leech";
         color = "Pink";
     }
+
+
 }

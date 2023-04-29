@@ -19,4 +19,24 @@ public class Pixeli extends Lutemon{
         color = "Pixeli";
     }
 
+
+    public int defend(int attack){
+        double randomNumber = Math.random();
+        double dodgeChange = 0.02;
+
+        if (randomNumber < dodgeChange) {                                  //Dodge change
+            System.out.println("Vihollinen oli liian ketterä lyönnillesi!");
+            attack = 0;
+        }
+        double defenceRoll = defence * Math.random();   // rolls defence 0 to lutemons defence.
+        double damage = attack - defenceRoll; //Counts final damage after defending agaist attack
+        if (damage < 0){    // Condition for defence roll that lutemon won't get hp from enemy attack.
+            damage = 0;
+        }
+        System.out.println("tämä tosiaan on pixelin oma hyökkäys");
+        damage /= 2; //Pixels special. takes only half damage.
+
+        health -= (int)damage;
+        return (int) damage;
+    }
 }
