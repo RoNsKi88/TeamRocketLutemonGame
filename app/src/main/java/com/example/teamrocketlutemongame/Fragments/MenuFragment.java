@@ -28,7 +28,7 @@ public class MenuFragment extends Fragment {
     private RadioButton rbGameModeRandomBattle,rbGameModeTraining;
     private RadioButton rbDifficultyEasy,rbDifficultyNormal,rbDifficultyHard,rbDifficultyImpossible;
     private int difficultyMemory,gameModeMemory;
-    TextView Textview1, Textview2, Textview3;
+    TextView txtPlayerStats, txtPlayerWins, txtPlayerLosses;
 
 
     public MenuFragment() {
@@ -45,12 +45,12 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_menu, container, false);
-        Textview1 = view.findViewById(R.id.txtPlayerStats);
-        Textview2 = view.findViewById(R.id.txtPlayerWins);
-        Textview3 = view.findViewById(R.id.txtPlayerLosses);
+        txtPlayerStats = view.findViewById(R.id.txtPlayerStats);
+        txtPlayerWins = view.findViewById(R.id.txtPlayerWins);
+        txtPlayerLosses = view.findViewById(R.id.txtPlayerLosses);
 
-        Textview2.setText("Wins: " + Storage.getInstance().getPlayer().getWins());
-        Textview3.setText("Losses: " + Storage.getInstance().getPlayer().getLosses());
+        txtPlayerWins.setText("Wins: " + Storage.getInstance().getPlayer().getWins());
+        txtPlayerLosses.setText("Losses: " + Storage.getInstance().getPlayer().getLosses());
 
         Button btnStartBattle = view.findViewById(R.id.btnStartBattle);
         Button btnBackToStartMenu = view.findViewById(R.id.btnBackToStartMenu);
@@ -75,15 +75,15 @@ public class MenuFragment extends Fragment {
         btnStartBattle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Storage.getInstance().gameModeMemory = rgGameMode.getCheckedRadioButtonId();
-                Storage.getInstance().difficultyMemory = rgDifficulty.getCheckedRadioButtonId();
-                RadioButton rb = view.findViewById(rgGameMode.getCheckedRadioButtonId());
-                String trainingMode = rb.getText().toString();
+                Storage.getInstance().gameModeMemory = rgGameMode.getCheckedRadioButtonId();    // saves last selection of gamemode radiogroup
+                Storage.getInstance().difficultyMemory = rgDifficulty.getCheckedRadioButtonId();// saves last selection of difficulty raidogroup.
+                RadioButton rbGameMode = view.findViewById(rgGameMode.getCheckedRadioButtonId());
+                String trainingMode = rbGameMode.getText().toString();
 
                 RadioButton rbDifficulty = view.findViewById(rgDifficulty.getCheckedRadioButtonId());
                 String difficulty = rbDifficulty.getText().toString();
 
-                Battle.getInstace().setBattle(Storage.getInstance().getPlayer(),trainingMode,difficulty);
+                Battle.getInstace().setBattle(Storage.getInstance().getPlayer(),trainingMode,difficulty);   // setups the battle. "sends" player,training mode and difficulty to battle.
                 Intent intent = new Intent(view.getContext(), ActivityBattle.class);
                 startActivity(intent);
 
@@ -100,7 +100,7 @@ public class MenuFragment extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
-    public static void refresh(){
+    public static void refresh(){                   // for refreshing a fragment.
         RecyclerView shownLutemon = view.findViewById(R.id.selectedCharacterLutemon);
         shownLutemon.setLayoutManager(new LinearLayoutManager(view.getContext()));
         shownLutemon.setAdapter(new PlayerLutemonAdapter(view.getContext(), Storage.getInstance().getPlayer().getPlayerLutemon()));

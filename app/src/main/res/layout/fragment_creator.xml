@@ -11,15 +11,14 @@
     <EditText
         android:id="@+id/txtInputName"
         android:layout_width="0dp"
-        android:layout_height="95dp"
-        android:layout_marginTop="104dp"
-        android:ems="10"
+        android:layout_height="wrap_content"
         android:hint="Give name here"
         android:inputType="textPersonName"
+        android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="@+id/imgLutemon"
         app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toStartOf="@+id/imgLutemon"
-        app:layout_constraintTop_toBottomOf="@+id/imgLutemon" />
+        app:layout_constraintTop_toBottomOf="@+id/CreateCb" />
 
     <ImageView
         android:id="@+id/imgLutemon"
@@ -36,12 +35,11 @@
         android:id="@+id/CreateCb"
         android:layout_width="61dp"
         android:layout_height="54dp"
-        android:layout_marginTop="24dp"
         android:text="HC?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txtInputName"
-        app:layout_constraintTop_toBottomOf="@+id/txtInputName" />
+        app:layout_constraintTop_toBottomOf="@+id/textCreateAttack" />
 
     <Button
         android:id="@+id/CreateBtn"

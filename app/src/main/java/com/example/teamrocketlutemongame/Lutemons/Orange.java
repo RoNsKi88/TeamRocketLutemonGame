@@ -5,7 +5,7 @@ import com.example.teamrocketlutemongame.R;
 
 public class Orange extends Lutemon {
     public Orange (String name, boolean hc) {
-        // name attack defence health imageFront imageBack hcStatus
+
         super(name,hc);
         attack = 15;
         defence = 0;
@@ -14,6 +14,6 @@ public class Orange extends Lutemon {
         imgFront = R.drawable.orange_front;
         imgBack = R.drawable.orange_back;
         special = "ExtCritChan";
-        color = "Orange";
+
     }
 }

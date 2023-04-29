@@ -5,7 +5,7 @@ import com.example.teamrocketlutemongame.R;
 
 public class CashBag extends Lutemon {
     public CashBag(String name, boolean hc) {
-        // name attack defence health imageFront imageBack hcStatus
+
         super(name, hc);
         attack = 1;
         defence = 0;
@@ -14,10 +14,10 @@ public class CashBag extends Lutemon {
         imgFront = R.drawable.cash_bag;
         imgBack = R.drawable.cash_bag;
         special = "Nothing";
-        color = "Cashbag";
+
     }
 
-    public void boost(int boost) {
+    public void boost(int boost) {  // boosts cashbags maxhealth levels for given amount
 
         for (int i = 0; i < boost; i++) {
             level += 1;

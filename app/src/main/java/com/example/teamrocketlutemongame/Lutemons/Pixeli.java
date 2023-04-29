@@ -2,12 +2,12 @@ package com.example.teamrocketlutemongame.Lutemons;
 
 import com.example.teamrocketlutemongame.Lutemon;
 import com.example.teamrocketlutemongame.R;
-import com.example.teamrocketlutemongame.Stats;
+
 
 public class Pixeli extends Lutemon{
 
     public Pixeli (String name, boolean hc) {
-        // name attack defence health imageFront imageBack hcStatus
+
         super(name,hc);
         attack = 30;
         defence = 30;
@@ -16,7 +16,7 @@ public class Pixeli extends Lutemon{
         imgFront = R.drawable.pixel_back;
         imgBack = R.drawable.pixel_back;
         special = "Spiky";
-        color = "Pixeli";
+
     }
 
 
@@ -24,8 +24,7 @@ public class Pixeli extends Lutemon{
         double randomNumber = Math.random();
         double dodgeChange = 0.02;
 
-        if (randomNumber < dodgeChange) {                                  //Dodge change
-            System.out.println("Vihollinen oli liian ketterä lyönnillesi!");
+        if (randomNumber < dodgeChange) {               //Dodge change
             attack = 0;
         }
         double defenceRoll = defence * Math.random();   // rolls defence 0 to lutemons defence.
@@ -33,7 +32,6 @@ public class Pixeli extends Lutemon{
         if (damage < 0){    // Condition for defence roll that lutemon won't get hp from enemy attack.
             damage = 0;
         }
-        System.out.println("tämä tosiaan on pixelin oma hyökkäys");
         damage /= 2; //Pixels special. takes only half damage.
 
         health -= (int)damage;

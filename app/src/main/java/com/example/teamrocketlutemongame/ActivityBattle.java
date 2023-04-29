@@ -46,7 +46,7 @@ public class ActivityBattle extends AppCompatActivity {
         enemy = battle.getEnemy();
         imgPlayer = findViewById(R.id.imgPlayer);
         imgEnemy = findViewById(R.id.imgEnemy);
-        player.getPlayerLutemon().getColor();
+
         imgEnemy.setImageResource(enemy.getPlayerLutemon().imgFront);
         imgPlayer.setImageResource(player.getPlayerLutemon().imgBack);
         txtDamageNumber = findViewById(R.id.txtDamageNro);
@@ -102,25 +102,24 @@ public class ActivityBattle extends AppCompatActivity {
                 enemyPosX = imgEnemy.getX();
                 Handler attackHandler = new Handler();
                 btnAttack.setVisibility(View.GONE);
-                animationTimer = 0;
-                while (player.getPlayerLutemon().getHP() > 0 && enemy.getPlayerLutemon().getHP() > 0) {
+                animationTimer = 0; // counter for animations.
+                while (player.getPlayerLutemon().getHP() > 0 && enemy.getPlayerLutemon().getHP() > 0) { //simulate battle.
 
 
                     //player attack//
 
-                    damage = player.getPlayerLutemon().makeAttack();
-                    damage = enemy.getPlayerLutemon().defend(damage);
+                    damage = player.getPlayerLutemon().makeAttack();    // function return lutemons generated damage
+                    damage = enemy.getPlayerLutemon().defend(damage);   // function defends agaist enemy attack. and returns total damage done
                     int hpLeft = enemy.getPlayerLutemon().getHP();
 
-
-                    if(player.getPlayerLutemon().addXP(damage * xpMultiplier)){
-                        Toast toast = Toast.makeText(context,"LevelUP!!!!!",Toast.LENGTH_LONG);
+                    if(player.getPlayerLutemon().addXP(damage * xpMultiplier)){ // Function return true if lutemon gets level.
+                        Toast toast = Toast.makeText(context,"LevelUP!!!!!",Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER,0,0);
                         toast.show();
                     }
-                    animationTimer = attackAnimation(player, txtEnemyHP, damage, hpLeft, enemyMaxHP, imgPlayer, progressBarEnemy, playerPosX, playerPosY, enemyPosX, enemyPosY);
+                    attackAnimation(player.getPlayerLutemon(),enemy.getPlayerLutemon(), txtEnemyHP, damage, hpLeft, enemyMaxHP, imgPlayer, progressBarEnemy, playerPosX, playerPosY, enemyPosX, enemyPosY);
                     if (player.getPlayerLutemon() instanceof Pink) { // pinks Speciality
-                        player.getPlayerLutemon().setHP((int) (damage * 0.1));
+                        player.getPlayerLutemon().setHP((int) (damage * 0.3));
                     }
                     //player attack ends//
 
@@ -129,24 +128,25 @@ public class ActivityBattle extends AppCompatActivity {
                         damage = enemy.getPlayerLutemon().makeAttack();
                         damage = player.getPlayerLutemon().defend(damage);
                         hpLeft = player.getPlayerLutemon().getHP();
-                        attackAnimation(enemy, txtPlayerHP, damage, hpLeft, playerMaxHP, imgEnemy, progressBarPlayer, enemyPosX, enemyPosY, playerPosX, playerPosY);
-                        if (enemy.getPlayerLutemon().getColor().equals("Pink")) {
+                        attackAnimation(enemy.getPlayerLutemon(),player.getPlayerLutemon(), txtPlayerHP, damage, hpLeft, playerMaxHP, imgEnemy, progressBarPlayer, enemyPosX, enemyPosY, playerPosX, playerPosY);
+                        if (enemy.getPlayerLutemon() instanceof Pink) {
                             enemy.getPlayerLutemon().setHP((int) (damage * 0.1));
                         }
                     } else {                                      //if dead.
                         attackHandler.postDelayed(new Runnable() {                  //attacker movement over opponent with delay
                             @Override
                             public void run() {
+                                System.out.println(enemy.getPlayerLutemon().getName() + "Menehtyi traagisesti.");
                                 imgEnemy.animate().rotationX(60);
                                 imgEnemy.animate().alpha(0).setDuration(1000);
-                                if (!enemy.getPlayerLutemon().getColor().equals("Cashbag")) {
+                                if (!(enemy.getPlayerLutemon() instanceof CashBag)) {
                                     player.setWins();
                                     player.getPlayerLutemon().setWins();
                                 }else{
                                     player.setTrainingDays();
-                                    if(player.getTrainingDays() == 1){
+                                    if(player.getTrainingDays() == 10){ //Easter egg. get 10 training days to unlock
                                         Toast toast = Toast.makeText(ActivityBattle.this,"Onneksiolkoon! Löysit easterEgin!\nYllätys lisätty varastoon!",Toast.LENGTH_LONG);
-                                        toast.setGravity(Gravity.CENTER,0,0);
+                                        toast.setGravity(Gravity.BOTTOM,0,0);
                                         toast.show();
                                         Lutemon easterEggCashBag = new CashBag("MinunRahet",true);
                                         easterEggCashBag.attack += 100;
@@ -165,30 +165,35 @@ public class ActivityBattle extends AppCompatActivity {
                         attackHandler.postDelayed(new Runnable() {  //player health check.
                             @Override
                             public void run() {
-                                    imgPlayer.animate().alpha(0).setDuration(1000);// else end combat.
-                                    imgPlayer.animate().rotationX(-60);    // rotates lutemon if dead
-                                    player.getPlayerLutemon().setLosses();
-                                    player.setLosses();
-                                    txtWinner.setText("You Lose!");
-                                    winningScreen.setVisibility(View.VISIBLE);
-                                    btnAttack.setVisibility(View.GONE);
+                                System.out.println(player.getPlayerLutemon().getName() + " Menehtyi traagisesti.");
+                                imgPlayer.animate().alpha(0).setDuration(1000);// else end combat.
+                                imgPlayer.animate().rotationX(-60);    // rotates lutemon if dead
+                                player.getPlayerLutemon().setLosses();
+                                player.setLosses();
+                                txtWinner.setText("You Lose!");
+                                winningScreen.setVisibility(View.VISIBLE);
+                                btnAttack.setVisibility(View.GONE);
 
-                                    if (player.getPlayerLutemon().getHcStatus()) {   // if lutemon has hc status
-                                        txtWinner.setText("You Lose! " + player.getPlayerLutemon().getName() + " is dead :'(");
-                                        Storage.getInstance().addDeadLutemon(player.getPlayerLutemon());
-                                        if (Storage.getInstance().getLutemons().size() == 0) {
-                                            player.setPlayerLutemon(new Pixeli("Pixeli", true));
-                                        } else {
-                                            player.setPlayerLutemon(Storage.getInstance().getLutemon(0));
-                                            Storage.getInstance().removeLutemon(0);
+                                if (player.getPlayerLutemon().getHcStatus()) {   // if lutemon has hc status
+                                    txtWinner.setText("You Lose! " + player.getPlayerLutemon().getName() + " on siirtynyt hautausmaalle :'(");
+                                    Storage.getInstance().addDeadLutemon(player.getPlayerLutemon());
+                                    if (Storage.getInstance().getLutemons().size() == 0) {  // easteregg lose all lutemons to gain pixeli. can happen multiple times.
+                                        Toast toast = Toast.makeText(ActivityBattle.this,"Listaltasi loppui lutemonit.\nOta siitä pixeli piristämään päivää!",Toast.LENGTH_LONG);
+                                        toast.setGravity(Gravity.BOTTOM,0,0);
+                                        toast.show();
+                                        player.setPlayerLutemon(new Pixeli("Pixeli", true));
+                                    } else {
+                                        player.setPlayerLutemon(Storage.getInstance().getLutemon(0));
+                                        Storage.getInstance().removeLutemon(0);
                                     }
                                 }
                             }
                         }, animationTimer);
                     }
                 }
-            }public long attackAnimation(Character attacker,TextView txtenemyHP,int damage,int hpLeft,int opponentMaxHp, ImageView characterImage,ProgressBar opponentHpBar, float attackerPosX, float attackerPosY, float defenderPosX, float defenderPosY){
+            }public long attackAnimation(Lutemon attacker,Lutemon defender,TextView txtenemyHP,int damage,int hpLeft,int opponentMaxHp, ImageView characterImage,ProgressBar opponentHpBar, float attackerPosX, float attackerPosY, float defenderPosX, float defenderPosY){
                 characterImage.animate().setDuration(400);
+
 
 
                 attackHandler.postDelayed(new Runnable() {                  //attacker movement over opponent
@@ -212,6 +217,7 @@ public class ActivityBattle extends AppCompatActivity {
                         txtDamageNumber.setX(defenderPosX);
                         txtDamageNumber.setY(defenderPosY);
                         txtDamageNumber.animate().alpha(1);
+                        System.out.println(attacker.getName()+": teki "+ damage + " vahinkoa " + defender.getName() + ":iin");
                         attackHandler.postDelayed(new Runnable() {                  //re position attacker to its start position.
                             @Override
                             public void run() {
@@ -225,7 +231,7 @@ public class ActivityBattle extends AppCompatActivity {
                 animationTimer += characterImage.animate().getDuration();   //add delay for animations.
                 return animationTimer;
             }
-            public void refreshHealthStatus(TextView characterHP,int hpLeft,int opponentMaxHp,ProgressBar progressBar){
+            public void refreshHealthStatus(TextView characterHP,int hpLeft,int opponentMaxHp,ProgressBar progressBar){ //refresh characters stats.
                 int progress;
 
                 if (hpLeft < 0) {

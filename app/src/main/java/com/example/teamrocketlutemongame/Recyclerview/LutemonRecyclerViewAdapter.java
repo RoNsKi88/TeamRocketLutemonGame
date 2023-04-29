@@ -55,12 +55,12 @@ public class LutemonRecyclerViewAdapter extends RecyclerView.Adapter<LutemonRecy
             public void onClick(View v) {
                 Storage storage = Storage.getInstance();
 
-                Storage.getInstance().getLutemons().add(Storage.getInstance().getPlayer().getPlayerLutemon());
+                Storage.getInstance().getLutemons().add(Storage.getInstance().getPlayer().getPlayerLutemon());  //gets players lutemon and adds it back to list.
 
-                storage.getPlayer().setPlayerLutemon(storage.getLutemon(pos));
-                storage.removeLutemon(pos);
+                storage.getPlayer().setPlayerLutemon(storage.getLutemon(pos));                                  //sets clicked lutemon to player.
+                storage.removeLutemon(pos);                                                                     //removes lutemon from storage.
                 notifyDataSetChanged();
-                CollectionFragment.refresh();
+                CollectionFragment.refresh();           //refreshes Collections fragment.
                 MenuFragment.refresh();
 
             }

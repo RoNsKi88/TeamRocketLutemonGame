@@ -6,7 +6,7 @@ import com.example.teamrocketlutemongame.R;
 public class Gray extends Lutemon {
 
     public Gray(String name, boolean hc) {
-        // name attack defence health imageFront imageBack hcStatus
+
         super(name,hc);
         attack = 10;
         defence = 10;
@@ -15,7 +15,7 @@ public class Gray extends Lutemon {
         imgFront = R.drawable.gray_front;
         imgBack = R.drawable.gray_back;
         special = "ExtDefRol";
-        color = "Gray";
+
     }
 
 }

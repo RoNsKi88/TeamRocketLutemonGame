@@ -12,8 +12,8 @@ import java.util.Random;
 
 public class Battle {
     private Character player,enemy;
-    private String CreateLutemon;
-    private Lutemon Opponent;
+
+
     public String difficulty;
     public double xpMultiplied;
     private static Battle battle = null;
@@ -54,13 +54,14 @@ public class Battle {
                 break;
             case "Impossible":
                 karma *= 1.4;
-                xpMultiplied = 1;
+                xpMultiplied = 1.25;
                 break;
             default:
                 karma = karma;
         }
         int boost = (int)karma;
 
+        Lutemon Opponent;
         switch (mode){
             case "Training":
                 Opponent = new CashBag("Cashbag",false);
@@ -71,12 +72,12 @@ public class Battle {
                 int winRate = player.getWins()-player.getLosses();
                 if((winRate % 10) == 0 && winRate != 0 ){
                     Opponent = new Pixeli("YberPixeli",false);
-                    Opponent.boost(boost * 2);
+                    Opponent.boost((int)(boost * 1.2));
                     enemy.setPlayerLutemon(Opponent);
                     break;
                 }
                 random = new Random();
-                CreateLutemon = Lutemon.colors.get(random.nextInt(Lutemon.colors.size()-1)); // Makes it so Pixeli doesnt appear as random enemy
+                String CreateLutemon = Lutemon.colors.get(random.nextInt(Lutemon.colors.size()-1)); // Makes it so Pixeli doesnt appear as random enemy
                 if (CreateLutemon.equals("Green")) {
                     Opponent = new Green(enemyLutemonName,false);
                     Opponent.boost(boost);

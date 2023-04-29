@@ -58,7 +58,7 @@ public class CollectionFragment extends Fragment {
         adapter = new LutemonRecyclerViewAdapter(view.getContext(), Storage.getInstance().getLutemons());
 
     }
-    public static void refresh(){
+    public static void refresh(){   // refreses recyclerview and players lutemon. attached to create lutemon and selecting lutemon.
         RecyclerView rvLutemons = view.findViewById(R.id.rcvLutemons);
         rvLutemons.setLayoutManager(new LinearLayoutManager(view.getContext()));
         rvLutemons.setAdapter(new LutemonRecyclerViewAdapter(view.getContext(), Storage.getInstance().getLutemons()));

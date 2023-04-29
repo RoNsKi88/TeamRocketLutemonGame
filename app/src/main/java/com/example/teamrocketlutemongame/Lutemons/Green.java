@@ -6,7 +6,7 @@ import com.example.teamrocketlutemongame.R;
 public class Green extends Lutemon {
 
     public Green (String name, boolean hc) {
-        // name attack defence health imageFront imageBack hcStatus
+
         super(name,hc);
         attack = 10;
         defence = 0;
@@ -15,6 +15,6 @@ public class Green extends Lutemon {
         imgFront = R.drawable.green_front;
         imgBack = R.drawable.green_back;
         special = "IgnoreDmg";
-        color = "Green";
+
     }
 }

@@ -11,7 +11,6 @@ import android.widget.Button;
 import com.example.teamrocketlutemongame.Lutemons.Orange;
 
 public class ActivityStartMenu extends AppCompatActivity {
-    ColorTheme colorTheme = new ColorTheme();
     Button btnNewGame,btnLoadGame,btnSaveGame,btnDeleteSave;
     private Context context;
 
