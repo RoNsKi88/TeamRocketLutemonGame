@@ -1,13 +1,11 @@
 package com.example.teamrocketlutemongame;
 
-import android.os.Handler;
-import android.widget.ImageView;
-
 import com.example.teamrocketlutemongame.Lutemons.CashBag;
 import com.example.teamrocketlutemongame.Lutemons.Gray;
 import com.example.teamrocketlutemongame.Lutemons.Green;
 import com.example.teamrocketlutemongame.Lutemons.Orange;
 import com.example.teamrocketlutemongame.Lutemons.Pink;
+import com.example.teamrocketlutemongame.Lutemons.Pixeli;
 import com.example.teamrocketlutemongame.Lutemons.Rainbow;
 
 import java.util.Random;
@@ -17,7 +15,7 @@ public class Battle {
     private String CreateLutemon;
     private Lutemon Opponent;
     public String difficulty;
-    public int xpMultiplied;
+    public double xpMultiplied;
     private static Battle battle = null;
 
     private Battle(){
@@ -32,31 +30,31 @@ public class Battle {
 
     public void setBattle(Character player,String mode,String difficulty) {
         this.difficulty = difficulty;
-        System.out.println(player.getWins());
         player.getPlayerLutemon().resetHP();
         this.player = player;
-        String color;
         enemy = new Character("Enemy");
-        int karma = player.getWins() - player.getLosses();
+        float karma = player.getWins() - player.getLosses();  // karma effects enemy difficulty.
         if (karma < 0){karma = 0;}
+        Random random = new Random();
+        String enemyLutemonName = Lutemon.enemyNames.get(random.nextInt(Lutemon.enemyNames.size())); //gets random lutemon name for enemy.
 
 
-        switch (difficulty){
+        switch (difficulty){    // difficulty
             case "Easy":
+                karma *= 0.6;
+                xpMultiplied = 0.5;
+                break;
+            case "Normal":
+                karma *= 0.8;
+                xpMultiplied = 0.75;
+                break;
+            case "Hard":
                 karma *= 1;
                 xpMultiplied = 1;
                 break;
-            case "Normal":
-                karma *= 2;
-                xpMultiplied = 2;
-                break;
-            case "Hard":
-                karma *= 4;
-                xpMultiplied = 4;
-                break;
             case "Impossible":
-                karma *= 8;
-                xpMultiplied = 8;
+                karma *= 1.4;
+                xpMultiplied = 1;
                 break;
             default:
                 karma = karma;
@@ -70,36 +68,41 @@ public class Battle {
                 enemy.setPlayerLutemon(Opponent);
                 break;
             case "RandomBattle":
-                Random random = new Random();
+                int winRate = player.getWins()-player.getLosses();
+                if((winRate % 10) == 0 && winRate != 0 ){
+                    Opponent = new Pixeli("YberPixeli",false);
+                    Opponent.boost(boost * 2);
+                    enemy.setPlayerLutemon(Opponent);
+                    break;
+                }
+                random = new Random();
                 CreateLutemon = Lutemon.colors.get(random.nextInt(Lutemon.colors.size()-1)); // Makes it so Pixeli doesnt appear as random enemy
                 if (CreateLutemon.equals("Green")) {
-                    Opponent = new Green("",false);
+                    Opponent = new Green(enemyLutemonName,false);
                     Opponent.boost(boost);
                     enemy.setPlayerLutemon(Opponent);
                     break;
                 }else if (CreateLutemon.equals("Orange")) {
-                    Opponent = new Orange("",false);
+                    Opponent = new Orange(enemyLutemonName,false);
                     Opponent.boost(boost);
                     enemy.setPlayerLutemon(Opponent);
                     break;
                 }else if (CreateLutemon.equals("Rainbow")) {
-                    Opponent = new Rainbow("",false);
+                    Opponent = new Rainbow(enemyLutemonName,false);
                     Opponent.boost(boost);
                     enemy.setPlayerLutemon(Opponent);
                     break;
                 }else if (CreateLutemon.equals("Gray")) {
-                    Opponent = new Gray("",false);
+                    Opponent = new Gray(enemyLutemonName,false);
                     Opponent.boost(boost);
                     enemy.setPlayerLutemon(Opponent);
                     break;
                 }else if (CreateLutemon.equals("Pink")) {
-                    Opponent = new Orange("",false);
+                    Opponent = new Pink(enemyLutemonName,false);
                     Opponent.boost(boost);
                     enemy.setPlayerLutemon(Opponent);
                     break;
                 }
-                // System.out.println("Ei osunut mihinkään, kokeillaan uudelleen...");
-
             default:
                 break;
         }

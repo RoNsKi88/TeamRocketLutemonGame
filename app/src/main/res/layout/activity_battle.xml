@@ -74,12 +74,15 @@
         android:id="@+id/btnAttack"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Attack"
-        app:layout_constraintEnd_toEndOf="@+id/progressBarPlayer"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="#DC0000"
+        android:text="StartFight!"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="@+id/progressBarPlayer"
-        app:layout_constraintTop_toBottomOf="@+id/progressBarPlayer" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtPlayerName"
@@ -147,5 +150,27 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/txtEnemyLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/progressBarEnemy"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarEnemy" />
+
+    <TextView
+        android:id="@+id/txtPlayerLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="TextView"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/progressBarPlayer"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarPlayer" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

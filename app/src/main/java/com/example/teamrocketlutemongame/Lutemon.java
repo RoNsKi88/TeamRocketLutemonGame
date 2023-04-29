@@ -1,14 +1,11 @@
 package com.example.teamrocketlutemongame;
 
-import android.widget.ImageView;
-
 import com.example.teamrocketlutemongame.Lutemons.CashBag;
 import com.example.teamrocketlutemongame.Lutemons.Gray;
 import com.example.teamrocketlutemongame.Lutemons.Green;
 import com.example.teamrocketlutemongame.Lutemons.Orange;
 import com.example.teamrocketlutemongame.Lutemons.Pixeli;
 import com.example.teamrocketlutemongame.Lutemons.Rainbow;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,19 +29,13 @@ public class Lutemon extends Specs implements Serializable {
             name = Lutemon.randomLutemonNames.get(random.nextInt(Lutemon.randomLutemonNames.size()));
         }
         this.name = name;
-        this.attack = attack;
-        this.defence = defence;
-        this.maxHealth = maxHealth;
-        this.health = maxHealth;
-        this.imgFront = imgFront;
-        this.imgBack = imgBack;
         this.hardcore = hc;
-        this.special = special;
 
     }
     public void boost(int boost){
         for (int i=0;i<boost;i++){
-            if (this instanceof CashBag){
+            if (this instanceof CashBag){// if creating training enemy levels only health.
+                level += 1;
                 for (int j = 0;j < level;j++){
                     System.out.println("Cashbagin levutus");
                     maxHealth += 2;
@@ -52,11 +43,10 @@ public class Lutemon extends Specs implements Serializable {
             }else{
                 levelUp();
             }
-
         }
     }
 
-    public void addXP(int points){
+    public void addXP(double points){
         experience += points;
         if (experience > lvlUp){
             levelUp();
@@ -66,7 +56,7 @@ public class Lutemon extends Specs implements Serializable {
     protected void levelUp(){
         int j;
         level += 1;
-        lvlUp *= 1.2;
+        lvlUp *= 1.4;
         for (int i = 0;i < level;i++){
             j = (int)(Math.random()*3);
             switch (j){

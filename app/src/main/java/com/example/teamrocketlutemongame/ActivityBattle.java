@@ -21,13 +21,13 @@ public class ActivityBattle extends AppCompatActivity {
     private ImageView imgEnemy,imgPlayer;
     private Battle battle;
     private Button btnAttack, btnBackToMenu;
-    private TextView txtPlayerHP,txtEnemyHP,txtPlayerName, txtEnemyName,txtWinner,txtDamageNumber;
-    private int damage;
+    private TextView txtPlayerHP,txtEnemyHP,txtPlayerName, txtEnemyName,txtWinner,txtDamageNumber, txtEnemyLevel,txtPlayerLevel;
+    private int damage,playerMaxHP,enemyMaxHP;
     private float playerPosX,playerPosY,enemyPosY,enemyPosX;
     private long animationTimer;
     private Handler attackHandler = new Handler();
     private ConstraintLayout winningScreen;
-    private int xpMultiplier;
+    private double xpMultiplier;
 
 
     @Override
@@ -46,11 +46,19 @@ public class ActivityBattle extends AppCompatActivity {
         imgPlayer.setImageResource(player.getPlayerLutemon().imgBack);
         txtDamageNumber = findViewById(R.id.txtDamageNro);
 
+        txtPlayerLevel = findViewById(R.id.txtPlayerLevel);
+        txtEnemyLevel = findViewById(R.id.txtEnemyLevel);
+        txtPlayerLevel.setText("LVL: "+String.valueOf(player.getPlayerLutemon().getLevel()));
+        txtEnemyLevel.setText("LVL: "+String.valueOf(enemy.getPlayerLutemon().getLevel()));
+
         winningScreen = findViewById(R.id.winningScreen);
         winningScreen.setVisibility(View.GONE);
         txtWinner = findViewById(R.id.txtWinnerLoser);
         btnBackToMenu = findViewById(R.id.btnBackToMenu);
 
+
+        playerMaxHP = player.getPlayerLutemon().getMaxHP();
+        enemyMaxHP = enemy.getPlayerLutemon().getMaxHP();
         btnBackToMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,7 +76,7 @@ public class ActivityBattle extends AppCompatActivity {
         progressBarPlayer.setProgress(100);
 
         txtEnemyHP = findViewById(R.id.txtEnemyHP);
-        txtEnemyHP.setText("HP "+enemy.getPlayerLutemon().getHP()+"/"+enemy.getPlayerLutemon().getMaxHP());
+        txtEnemyHP.setText("HP: "+enemy.getPlayerLutemon().getHP());
 
         txtEnemyName = findViewById(R.id.txtEnemyName);
         txtEnemyName.setText(enemy.getPlayerLutemon().getName());
@@ -77,7 +85,7 @@ public class ActivityBattle extends AppCompatActivity {
         txtPlayerName.setText(player.getPlayerLutemon().getName());
 
         txtPlayerHP = findViewById(R.id.txtPlayerHP);
-        txtPlayerHP.setText("HP "+player.getPlayerLutemon().getHP()+"/"+player.getPlayerLutemon().getMaxHP());
+        txtPlayerHP.setText("HP: "+player.getPlayerLutemon().getHP());
 
         btnAttack = findViewById(R.id.btnAttack);
         btnAttack.setOnClickListener(new View.OnClickListener() {
@@ -89,79 +97,78 @@ public class ActivityBattle extends AppCompatActivity {
                 enemyPosX = imgEnemy.getX();
                 Handler attackHandler = new Handler();
                 btnAttack.setVisibility(View.GONE);
-
-                //player attack//
                 animationTimer = 0;
-                damage = player.getPlayerLutemon().makeAttack();
-                damage = enemy.getPlayerLutemon().defend(damage);
+                while (player.getPlayerLutemon().getHP() > 0 && enemy.getPlayerLutemon().getHP() > 0) {
 
 
-                player.getPlayerLutemon().addXP(damage * xpMultiplier);
-                attackAnimation(player,damage,imgPlayer,playerPosX,playerPosY,enemyPosX,enemyPosY);
-                if (player.getPlayerLutemon().getColor().equals("Pink")){
-                    player.getPlayerLutemon().setHP((int)(damage*0.1));
-                }
-                //player attack ends//
+                    //player attack//
 
-                //enemy turn//
-                if (enemy.getPlayerLutemon().getHP() > 0) { //Enemy alive check.
-                    damage = enemy.getPlayerLutemon().makeAttack();
-                    damage = player.getPlayerLutemon().defend(damage);
-                    attackAnimation(enemy,damage,imgEnemy, enemyPosX, enemyPosY, playerPosX, playerPosY);
-                    if (enemy.getPlayerLutemon().getColor().equals("Pink")){
-                        enemy.getPlayerLutemon().setHP((int)(damage*0.1));
+                    damage = player.getPlayerLutemon().makeAttack();
+                    damage = enemy.getPlayerLutemon().defend(damage);
+                    int hpLeft = enemy.getPlayerLutemon().getHP();
+
+
+                    player.getPlayerLutemon().addXP(damage * xpMultiplier);
+                    animationTimer = attackAnimation(player, txtEnemyHP, damage, hpLeft, enemyMaxHP, imgPlayer, progressBarEnemy, playerPosX, playerPosY, enemyPosX, enemyPosY);
+                    if (player.getPlayerLutemon() instanceof Pink) { // pinks Speciality
+                        player.getPlayerLutemon().setHP((int) (damage * 0.1));
                     }
-                }
-                else {                                      //if dead.
-                    attackHandler.postDelayed(new Runnable() {                  //attacker movement over opponent with delay
-                        @Override
-                        public void run() {
-                            imgEnemy.animate().rotationX(60);
-                            imgEnemy.animate().alpha(0).setDuration(1000);
-                            if (!enemy.getPlayerLutemon().getColor().equals("Cashbag")){
-                                player.setWins();
-                                player.getPlayerLutemon().setWins();
+                    //player attack ends//
+
+                    //enemy turn//
+                    if (enemy.getPlayerLutemon().getHP() > 0) { //Enemy alive check.
+                        damage = enemy.getPlayerLutemon().makeAttack();
+                        damage = player.getPlayerLutemon().defend(damage);
+                        hpLeft = player.getPlayerLutemon().getHP();
+                        attackAnimation(enemy, txtPlayerHP, damage, hpLeft, playerMaxHP, imgEnemy, progressBarPlayer, enemyPosX, enemyPosY, playerPosX, playerPosY);
+                        if (enemy.getPlayerLutemon().getColor().equals("Pink")) {
+                            enemy.getPlayerLutemon().setHP((int) (damage * 0.1));
+                        }
+                    } else {                                      //if dead.
+                        attackHandler.postDelayed(new Runnable() {                  //attacker movement over opponent with delay
+                            @Override
+                            public void run() {
+                                imgEnemy.animate().rotationX(60);
+                                imgEnemy.animate().alpha(0).setDuration(1000);
+                                if (!enemy.getPlayerLutemon().getColor().equals("Cashbag")) {
+                                    player.setWins();
+                                    player.getPlayerLutemon().setWins();
+                                }
+
+                                txtWinner.setText("You Win!");
+                                winningScreen.setVisibility(View.VISIBLE);
+                                btnAttack.setVisibility(View.GONE);
                             }
+                        }, animationTimer);
+                    }
+                    //enemy turn ends//
+                    if (player.getPlayerLutemon().getHP() <= 0) {   //player alive check.
+                        attackHandler.postDelayed(new Runnable() {  //player health check.
+                            @Override
+                            public void run() {
+                                    imgPlayer.animate().alpha(0).setDuration(1000);// else end combat.
+                                    imgPlayer.animate().rotationX(-60);    // rotates lutemon if dead
+                                    player.getPlayerLutemon().setLosses();
+                                    player.setLosses();
+                                    txtWinner.setText("You Lose!");
+                                    winningScreen.setVisibility(View.VISIBLE);
+                                    btnAttack.setVisibility(View.GONE);
 
-                            txtWinner.setText("You Win!");
-                            winningScreen.setVisibility(View.VISIBLE);
-                            btnAttack.setVisibility(View.GONE);
-                        }
-                    },animationTimer);
-                }
-                //enemy turn ends//
-
-                attackHandler.postDelayed(new Runnable() {  //player health check.
-                    @Override
-                    public void run() {
-
-                        if (player.getPlayerLutemon().getHP() > 0) {    // if alive.
-                            btnAttack.setVisibility(View.VISIBLE);
-                        }
-                        else {
-                            imgPlayer.animate().alpha(0).setDuration(1000);// else end combat.
-                            imgPlayer.animate().rotationX(-60);    // rotates lutemon if dead
-
-                            player.getPlayerLutemon().setLosses();
-                            player.setLosses();
-                            txtWinner.setText("You Lose!");
-                            winningScreen.setVisibility(View.VISIBLE);
-                            btnAttack.setVisibility(View.GONE);
-
-                            if (player.getPlayerLutemon().getHcStatus()){   // if lutemon has hc status
-                                txtWinner.setText("You Lose! "+player.getPlayerLutemon().getName()+" is dead :'(");
-                                Storage.getInstance().addDeadLutemon(player.getPlayerLutemon());
-                                if(Storage.getInstance().getLutemons().size() == 0){
-                                    player.setPlayerLutemon(new Pixeli("Pixeli",true));
-                                }else {
-                                    player.setPlayerLutemon(Storage.getInstance().getLutemon(0));
-                                    Storage.getInstance().removeLutemon(0);
+                                    if (player.getPlayerLutemon().getHcStatus()) {   // if lutemon has hc status
+                                        txtWinner.setText("You Lose! " + player.getPlayerLutemon().getName() + " is dead :'(");
+                                        Storage.getInstance().addDeadLutemon(player.getPlayerLutemon());
+                                        if (Storage.getInstance().getLutemons().size() == 0) {
+                                            player.setPlayerLutemon(new Pixeli("Pixeli", true));
+                                        } else {
+                                            player.setPlayerLutemon(Storage.getInstance().getLutemon(0));
+                                            Storage.getInstance().removeLutemon(0);
+                                    }
                                 }
                             }
-                        }
+                        }, animationTimer);
                     }
-                },animationTimer);
-            }public void attackAnimation(Character attacker,int damage, ImageView characterImage, float attackerPosX, float attackerPosY, float defenderPosX, float defenderPosY){
+                }
+            }public long attackAnimation(Character attacker,TextView txtenemyHP,int damage,int hpLeft,int opponentMaxHp, ImageView characterImage,ProgressBar opponentHpBar, float attackerPosX, float attackerPosY, float defenderPosX, float defenderPosY){
                 characterImage.animate().setDuration(400);
 
 
@@ -175,7 +182,7 @@ public class ActivityBattle extends AppCompatActivity {
                     @Override
                     public void run() {
                         characterImage.animate().rotationXBy(360);
-                        refreshHealthStatus();
+                        refreshHealthStatus(txtenemyHP,hpLeft,opponentMaxHp,opponentHpBar);
                     }
                 },animationTimer + characterImage.animate().getDuration()/2);
                 animationTimer += characterImage.animate().getDuration();   //add delay for animations.
@@ -193,35 +200,22 @@ public class ActivityBattle extends AppCompatActivity {
                             }
                         },txtDamageNumber.animate().getDuration());
 
-
                         characterImage.animate().x(attackerPosX).y(attackerPosY);
                     }
                 },animationTimer);
                 animationTimer += characterImage.animate().getDuration();   //add delay for animations.
-                return ;
+                return animationTimer;
             }
-            public void refreshHealthStatus(){
+            public void refreshHealthStatus(TextView characterHP,int hpLeft,int opponentMaxHp,ProgressBar progressBar){
                 int progress;
 
-                //enemy//
-                if (enemy.getPlayerLutemon().getHP() < 0) {
-                    txtEnemyHP.setText("HP " + 0 + "/" + enemy.getPlayerLutemon().getMaxHP());
+                if (hpLeft < 0) {
+                    characterHP.setText("HP: " + 0);
                 }else {
-                    txtEnemyHP.setText("HP " + enemy.getPlayerLutemon().getHP() + "/" + enemy.getPlayerLutemon().getMaxHP());
+                    characterHP.setText("HP: " + hpLeft);
                 }
-                progress = (int)((float) enemy.getPlayerLutemon().getHP()/(float) enemy.getPlayerLutemon().getMaxHP()*100);
-                progressBarEnemy.setProgress(progress,true);
-                //enemy end//
-
-                //player//
-                if (player.getPlayerLutemon().getHP() < 0){
-                    txtPlayerHP.setText("HP " + 0 + "/" + player.getPlayerLutemon().getMaxHP());
-                }else {
-                    txtPlayerHP.setText("HP " + player.getPlayerLutemon().getHP() + "/" + player.getPlayerLutemon().getMaxHP());
-                }
-                progress = (int)((float) player.getPlayerLutemon().getHP()/(float) player.getPlayerLutemon().getMaxHP()*100);
-                progressBarPlayer.setProgress(progress,true);
-                //player end//
+                progress = (int)((float) hpLeft/(float) opponentMaxHp*100);
+                progressBar.setProgress(progress,true);
 
             }
         });
