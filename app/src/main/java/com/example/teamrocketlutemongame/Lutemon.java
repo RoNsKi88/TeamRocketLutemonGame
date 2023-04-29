@@ -2,6 +2,9 @@ package com.example.teamrocketlutemongame;
 
 import android.widget.ImageView;
 
+import com.example.teamrocketlutemongame.Lutemons.Pixeli;
+import com.example.teamrocketlutemongame.Lutemons.Rainbow;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,131 +12,51 @@ import java.util.Random;
 
 public class Lutemon extends Specs implements Serializable {
     private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("Gray","Green","Orange","Pink","Rainbow"));
-    public static final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","NuoriOsuja","Koodari","LutesinJäsen","Ruotsintentti","Matematiikantentti","Teppo Tarkka-ampuja","Mr Vac"));
-
-
-
-    public static final ArrayList<String> randomLutemonNames = new ArrayList<>(Arrays.asList("Jorma","Kaaleppi","Reiska","PatonkiAnneli","RoNsKi","Keijo","ErittäinKovaKivi!","KovinKivi","KumiTarzan"));
-
-    private int attack = 5;
-    private int defence = 0;
-    private int maxHealth = 20;
-    private int health = maxHealth;
-    private String special = "jumalanSiunaus";
+    protected static final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","NuoriOsuja","Koodari","LutesinJäsen","Ruotsintentti","Matematiikantentti","Teppo Tarkka-ampuja","Mr Vac"));
+    protected static final ArrayList<String> randomLutemonNames = new ArrayList<>(Arrays.asList("Jorma","Kaaleppi","Reiska","PatonkiAnneli","RoNsKi","Keijo","ErittäinKovaKivi!","KovinKivi","KumiTarzan"));
+    protected int attack = 10,defence = 10,maxHealth = 10,health = maxHealth,level = 0,experience,imgFront,imgBack;
+    private double lvlUp = 1.2;
+    protected String special;
     private static int id = 0;
-    private boolean hardcore;
-    private int level = 1;
-    double lvlUP = 10;
-    private float experience = 0;
+    protected boolean hardcore;
     private String color;
-    int imgFront,imgBack;
 
-    public Lutemon(String name, String color,int boost, boolean HC) {
+    public Lutemon(String name,boolean hc){
         id = id++;
+        if (name.isEmpty()){
+            Random random = new Random();
+            name = Lutemon.randomLutemonNames.get(random.nextInt(Lutemon.randomLutemonNames.size()));
+        }
         this.name = name;
-        this.color = color;
-        this.hardcore = HC;
-        addStats(color);
+        this.attack = attack;
+        this.defence = defence;
+        this.maxHealth = maxHealth;
+        this.health = maxHealth;
+        this.imgFront = imgFront;
+        this.imgBack = imgBack;
+        this.hardcore = hc;
+        this.special = special;
 
-
+    }
+    public void boost(int boost){
         for (int i=0;i<boost;i++){
-            if (name.equals("Cashbag")){
-                maxHealth += i;
-            }
-            else{
-                levelUp();
-                level += 1;
-            }
-        }
-    }
-
-    public Lutemon(String name,int boost) {
-        Random random = new Random();
-        color = colors.get(random.nextInt(colors.size()));
-        if (name == "Cashbag" ) {
-            this.name = enemyNames.get(random.nextInt(enemyNames.size()));
-            color = "Cashbag";
-        }
-        else {
-            if (name.isEmpty()){
-
-                name = enemyNames.get(random.nextInt(enemyNames.size()));
-            }
-            this.name = name;
-        }
-        addStats(color);
-
-        for (int i = 0;i<boost;i++){
             levelUp();
-            level += 1;
         }
     }
-    private void addStats(String color){
 
-        switch (color){
-            case "Gray":
-                maxHealth += 10;
-                health = maxHealth;
-                imgFront = R.drawable.gray_front;
-                imgBack = R.drawable.gray_back;
-                special = "RollExtreDef";
-                break;
-            case "Green":
-                defence += 10;
-                imgFront = R.drawable.green_front;
-                imgBack = R.drawable.green_back;
-                special = "IgnoreDmg";
-                break;
-            case "Orange":
-                attack += 10;
-                imgFront = R.drawable.orange_front;
-                imgBack = R.drawable.orange_back;
-                special = "CritHitChange";
-                break;
-            case "Pink":
-                maxHealth += 5;
-                attack += 2;
-                defence += 2;
-                imgFront = R.drawable.pink_front;
-                imgBack = R.drawable.pink_back;
-                special = "Leech";
-
-                break;
-            case "Rainbow":
-                attack += 10;
-                defence += -10;
-                maxHealth +=10;
-                health = maxHealth;
-                imgFront = R.drawable.rain_front;
-                imgBack = R.drawable.rain_back;
-                special = "Nothing";
-                break;
-            case "Cashbag":
-                attack = 1;
-                defence = 0;
-                maxHealth = 20;
-                health = maxHealth;
-                imgFront = R.drawable.cash_bag;
-                imgBack = R.drawable.cash_bag;
-                special = "Just a CashBag";
-
-            default:
-        }
-    }
     public void addXP(int points){
         experience += points;
 
-        if (experience > lvlUP){
+        if (experience > lvlUp){
             levelUp();
             level += 1;
             experience = 0;
         }
     }
-    private void levelUp(){
+    protected void levelUp(){
         int j;
-        lvlUP *= 1.2;
+        lvlUp *= 1.2;
         for (int i = 0;i < level;i++){
-            Random random = new Random();
             j = (int)(Math.random()*3);
             switch (j){
                 case 0:
@@ -143,13 +66,16 @@ public class Lutemon extends Specs implements Serializable {
                     defence += 1;
                     break;
                 case 2:
-                    maxHealth += 1;
+                    maxHealth += 2;
                     break;
             }
         }
     }
     public int makeAttack(){
         double damage = Math.random() * attack + 1;
+        if (this instanceof Pixeli){
+            System.out.println("tämä oli pixeli");
+        }
         if (getColor().equals("Rainbow")){
             System.out.println("tämä on testi");
             double extraRollDamage = Math.random() * attack + 1;

@@ -19,6 +19,12 @@ import android.widget.TextView;
 
 import com.example.teamrocketlutemongame.ActivityMenu;
 import com.example.teamrocketlutemongame.Lutemon;
+import com.example.teamrocketlutemongame.Lutemons.Gray;
+import com.example.teamrocketlutemongame.Lutemons.Green;
+import com.example.teamrocketlutemongame.Lutemons.Orange;
+import com.example.teamrocketlutemongame.Lutemons.Pink;
+import com.example.teamrocketlutemongame.Lutemons.Pixeli;
+import com.example.teamrocketlutemongame.Lutemons.Rainbow;
 import com.example.teamrocketlutemongame.R;
 import com.example.teamrocketlutemongame.Storage;
 
@@ -124,14 +130,32 @@ public class CreatorFragment extends Fragment {
                         else { HC = false;
                         }
 
-                        String Name = TextviewName.getText().toString();
-                        if (Name.isEmpty()){
-                            Random random = new Random();
-                            Name = Lutemon.randomLutemonNames.get(random.nextInt(Lutemon.randomLutemonNames.size()));
-                        }
+                        String name = TextviewName.getText().toString();
 
-                        String Color = spinnerLutemons.getSelectedItem().toString();
-                        Lutemon newLutemon = new Lutemon(Name, Color, 0, HC);
+
+                        String color = spinnerLutemons.getSelectedItem().toString();
+                        //Lutemon newLutemon = new Lutemon(Name, color, 0, HC);
+                        Lutemon newLutemon;
+                        switch (color){
+                            case ("Gray"):
+                                newLutemon = new Gray(name,HC);
+                                break;
+                            case ("Green"):
+                                newLutemon = new Green(name,HC);
+                                break;
+                            case ("Orange"):
+                                newLutemon = new Orange(name,HC);
+                                break;
+                            case ("Pink"):
+                                newLutemon = new Pink(name,HC);
+                                break;
+                            case ("Rainbow"):
+                                newLutemon = new Rainbow(name,HC);
+                                break;
+                            default:
+                                newLutemon = new Pixeli(name,HC);
+                                break;
+                        }
                         Storage.getInstance().addLutemon(newLutemon);
                         CollectionFragment.refresh();
 
