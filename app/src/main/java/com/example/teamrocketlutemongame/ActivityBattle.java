@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.teamrocketlutemongame.Lutemons.CashBag;
+
 public class ActivityBattle extends AppCompatActivity {
     private Character player, enemy;
     private ImageView imgEnemy,imgPlayer;
@@ -144,7 +146,7 @@ public class ActivityBattle extends AppCompatActivity {
                                 txtWinner.setText("You Lose! "+player.getPlayerLutemon().getName()+" is dead :'(");
                                 Storage.getInstance().addDeadLutemon(player.getPlayerLutemon());
                                 if(Storage.getInstance().getLutemons().size() == 0){
-                                    player.setPlayerLutemon(new Lutemon("EasterEgg","Cashbag",50,true));
+                                    player.setPlayerLutemon(new CashBag("EasterEgg",true));
                                 }else {
                                     player.setPlayerLutemon(Storage.getInstance().getLutemon(0));
                                     Storage.getInstance().removeLutemon(0);

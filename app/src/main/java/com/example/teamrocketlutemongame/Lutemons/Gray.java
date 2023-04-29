@@ -15,6 +15,7 @@ public class Gray extends Lutemon {
         imgFront = R.drawable.gray_front;
         imgBack = R.drawable.gray_back;
         special = "ExtDefRol";
+        color = "Gray";
     }
 
 }

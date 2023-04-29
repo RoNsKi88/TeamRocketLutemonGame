@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.teamrocketlutemongame.Lutemons.Orange;
+
 public class ActivityStartMenu extends AppCompatActivity {
     ColorTheme colorTheme = new ColorTheme();
     Button btnNewGame,btnLoadGame,btnSaveGame,btnDeleteSave;
@@ -38,7 +40,7 @@ public class ActivityStartMenu extends AppCompatActivity {
                 case (R.id.btnNewGame):
                     Storage.getInstance().getLutemons().clear();
                     Storage.getInstance().setPlayer(new Character("LutemonMestari"));
-                    Storage.getInstance().getPlayer().setPlayerLutemon(new Lutemon("MaailmanMatkaaja","Orange",0,true));
+                    Storage.getInstance().getPlayer().setPlayerLutemon(new Orange("MaailmanMatkaaja",true));
                     intent = new Intent(ActivityStartMenu.this, ActivityMenu.class);
                     startActivity(intent);
                     break;

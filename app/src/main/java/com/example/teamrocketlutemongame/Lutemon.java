@@ -2,6 +2,7 @@ package com.example.teamrocketlutemongame;
 
 import android.widget.ImageView;
 
+import com.example.teamrocketlutemongame.Lutemons.Orange;
 import com.example.teamrocketlutemongame.Lutemons.Pixeli;
 import com.example.teamrocketlutemongame.Lutemons.Rainbow;
 
@@ -11,7 +12,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class Lutemon extends Specs implements Serializable {
-    private final ArrayList<String> colors = new ArrayList<>(Arrays.asList("Gray","Green","Orange","Pink","Rainbow"));
+    public static final ArrayList<String> colors = new ArrayList<>(Arrays.asList("Gray","Green","Orange","Pink","Rainbow", "Pixeli"));
     protected static final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","NuoriOsuja","Koodari","LutesinJäsen","Ruotsintentti","Matematiikantentti","Teppo Tarkka-ampuja","Mr Vac"));
     protected static final ArrayList<String> randomLutemonNames = new ArrayList<>(Arrays.asList("Jorma","Kaaleppi","Reiska","PatonkiAnneli","RoNsKi","Keijo","ErittäinKovaKivi!","KovinKivi","KumiTarzan"));
     protected int attack = 10,defence = 10,maxHealth = 10,health = maxHealth,level = 0,experience,imgFront,imgBack;
@@ -19,7 +20,7 @@ public class Lutemon extends Specs implements Serializable {
     protected String special;
     private static int id = 0;
     protected boolean hardcore;
-    private String color;
+    protected String color;
 
     public Lutemon(String name,boolean hc){
         id = id++;
@@ -61,20 +62,23 @@ public class Lutemon extends Specs implements Serializable {
             switch (j){
                 case 0:
                     attack += 1;
+                    //System.out.println("Lvl up, you gain +1 att");
                     break;
                 case 1:
                     defence += 1;
+                    //System.out.println("Lvl up, you gain +1 def");
                     break;
                 case 2:
                     maxHealth += 2;
+                    //System.out.println("Lvl up, you gain +2 hp");
                     break;
             }
         }
     }
     public int makeAttack(){
         double damage = Math.random() * attack + 1;
-        if (this instanceof Pixeli){
-            System.out.println("tämä oli pixeli");
+        if (this instanceof Orange){
+            System.out.println("tämä oli Orange");
         }
         if (getColor().equals("Rainbow")){
             System.out.println("tämä on testi");

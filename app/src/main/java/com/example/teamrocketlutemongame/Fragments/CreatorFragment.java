@@ -32,15 +32,9 @@ import java.util.Random;
 
 
 public class CreatorFragment extends Fragment {
-
-
-
     public CreatorFragment() {
         // Required empty public constructor
     }
-
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,9 +43,6 @@ public class CreatorFragment extends Fragment {
 
         }
     }
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -69,6 +60,7 @@ public class CreatorFragment extends Fragment {
         Button btnCreateLutemon = view.findViewById(R.id.CreateBtn);
         TextView TextviewName = view.findViewById(R.id.txtInputName);
         CheckBox cb = view.findViewById((R.id.CreateCb));
+        Lutemon esivalinta;
 
 
 
@@ -78,44 +70,53 @@ public class CreatorFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
                     case 0:
+                        Lutemon esivalinta = new Gray("", true);
+                        imgLutemon.setImageResource(esivalinta.getImgFront());
+                        textviewHP.setText("HP: " + Integer.toString(esivalinta.getHP()));
 
-                        imgLutemon.setImageResource(R.drawable.gray_front);
-                        textviewHP.setText("HP: 30");
-                        textviewAttack.setText("ATT: 5");
-                        textviewDefence.setText("DEF: 0");
-                        textviewSpecial.setText("Special: RollExtreDef");
+                        textviewAttack.setText("ATT: " + Integer.toString(esivalinta.getAtk()));
+                        textviewDefence.setText("DEF: " + Integer.toString(esivalinta.getDef()));
+                        textviewSpecial.setText("Special: " + esivalinta.getSpecial());
                         break;
                     case 1:
 
-                        imgLutemon.setImageResource(R.drawable.green_front);
-                        textviewHP.setText("HP: 20");
-                        textviewAttack.setText("ATT: 5");
-                        textviewDefence.setText("DEF: 10");
-                        textviewSpecial.setText("IgnoreDmg");
+                        esivalinta = new Green("", true);
+                        imgLutemon.setImageResource(esivalinta.getImgFront());
+                        textviewHP.setText("HP: " + Integer.toString(esivalinta.getHP()));
+
+                        textviewAttack.setText("ATT: " + Integer.toString(esivalinta.getAtk()));
+                        textviewDefence.setText("DEF: " + Integer.toString(esivalinta.getDef()));
+                        textviewSpecial.setText("Special: " + esivalinta.getSpecial());
                         break;
                     case 2:
 
-                        imgLutemon.setImageResource(R.drawable.orange_front);
-                        textviewHP.setText("HP: 20");
-                        textviewAttack.setText("ATT: 15");
-                        textviewDefence.setText("DEF: 0");
-                        textviewSpecial.setText("Special: CritHitChange");
+                        esivalinta = new Orange("", true);
+                        imgLutemon.setImageResource(esivalinta.getImgFront());
+                        textviewHP.setText("HP: " + Integer.toString(esivalinta.getHP()));
+
+                        textviewAttack.setText("ATT: " + Integer.toString(esivalinta.getAtk()));
+                        textviewDefence.setText("DEF: " + Integer.toString(esivalinta.getDef()));
+                        textviewSpecial.setText("Special: " + esivalinta.getSpecial());
                         break;
                     case 3:
 
-                        imgLutemon.setImageResource(R.drawable.pink_front);
-                        textviewHP.setText("HP: 25");
-                        textviewAttack.setText("ATT: 7");
-                        textviewDefence.setText("DEF: 2");
-                        textviewSpecial.setText("Special: Leech");
+                        esivalinta = new Pink("", true);
+                        imgLutemon.setImageResource(esivalinta.getImgFront());
+                        textviewHP.setText("HP: " + Integer.toString(esivalinta.getHP()));
+
+                        textviewAttack.setText("ATT: " + Integer.toString(esivalinta.getAtk()));
+                        textviewDefence.setText("DEF: " + Integer.toString(esivalinta.getDef()));
+                        textviewSpecial.setText("Special: " + esivalinta.getSpecial());
                         break;
                     case 4:
 
-                        imgLutemon.setImageResource(R.drawable.rain_front);
-                        textviewHP.setText("HP: 30");
-                        textviewAttack.setText("ATT: 15");
-                        textviewDefence.setText("DEF: -10");
-                        textviewSpecial.setText("RollExtraAtk");
+                        esivalinta = new Rainbow("", true);
+                        imgLutemon.setImageResource(esivalinta.getImgFront());
+                        textviewHP.setText("HP: " + Integer.toString(esivalinta.getHP()));
+
+                        textviewAttack.setText("ATT: " + Integer.toString(esivalinta.getAtk()));
+                        textviewDefence.setText("DEF: " + Integer.toString(esivalinta.getDef()));
+                        textviewSpecial.setText("Special: " + esivalinta.getSpecial());
                         break;
                     default:
 
