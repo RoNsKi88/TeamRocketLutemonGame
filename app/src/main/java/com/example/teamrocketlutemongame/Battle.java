@@ -16,6 +16,8 @@ public class Battle {
     private Character player,enemy;
     private String CreateLutemon;
     private Lutemon Opponent;
+    public String difficulty;
+    public int xpMultiplied;
     private static Battle battle = null;
 
     private Battle(){
@@ -29,33 +31,37 @@ public class Battle {
     }
 
     public void setBattle(Character player,String mode,String difficulty) {
+        this.difficulty = difficulty;
         System.out.println(player.getWins());
         player.getPlayerLutemon().resetHP();
         this.player = player;
         String color;
         enemy = new Character("Enemy");
-        int karma = player.getWins()- player.getLosses();
+        int karma = player.getWins() - player.getLosses();
         if (karma < 0){karma = 0;}
 
 
-        double helperInt = karma;
         switch (difficulty){
             case "Easy":
-                helperInt *= 0.6;
+                karma *= 1;
+                xpMultiplied = 1;
                 break;
             case "Normal":
-                helperInt *= 0.8;
+                karma *= 2;
+                xpMultiplied = 2;
                 break;
             case "Hard":
-                helperInt = helperInt;
+                karma *= 4;
+                xpMultiplied = 4;
                 break;
             case "Impossible":
-                helperInt *= 1.2;
+                karma *= 8;
+                xpMultiplied = 8;
                 break;
             default:
-                helperInt = karma;
+                karma = karma;
         }
-        int boost = (int)helperInt;
+        int boost = (int)karma;
 
         switch (mode){
             case "Training":

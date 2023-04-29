@@ -13,6 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.teamrocketlutemongame.Lutemons.CashBag;
+import com.example.teamrocketlutemongame.Lutemons.Pink;
+import com.example.teamrocketlutemongame.Lutemons.Pixeli;
 
 public class ActivityBattle extends AppCompatActivity {
     private Character player, enemy;
@@ -25,12 +27,14 @@ public class ActivityBattle extends AppCompatActivity {
     private long animationTimer;
     private Handler attackHandler = new Handler();
     private ConstraintLayout winningScreen;
+    private int xpMultiplier;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
+        xpMultiplier = Battle.getInstace().xpMultiplied;
 
         battle = Battle.getInstace();
         player = battle.getPlayer();
@@ -90,7 +94,9 @@ public class ActivityBattle extends AppCompatActivity {
                 animationTimer = 0;
                 damage = player.getPlayerLutemon().makeAttack();
                 damage = enemy.getPlayerLutemon().defend(damage);
-                player.getPlayerLutemon().addXP(damage);
+
+
+                player.getPlayerLutemon().addXP(damage * xpMultiplier);
                 attackAnimation(player,damage,imgPlayer,playerPosX,playerPosY,enemyPosX,enemyPosY);
                 if (player.getPlayerLutemon().getColor().equals("Pink")){
                     player.getPlayerLutemon().setHP((int)(damage*0.1));
@@ -146,7 +152,7 @@ public class ActivityBattle extends AppCompatActivity {
                                 txtWinner.setText("You Lose! "+player.getPlayerLutemon().getName()+" is dead :'(");
                                 Storage.getInstance().addDeadLutemon(player.getPlayerLutemon());
                                 if(Storage.getInstance().getLutemons().size() == 0){
-                                    player.setPlayerLutemon(new CashBag("EasterEgg",true));
+                                    player.setPlayerLutemon(new Pixeli("Pixeli",true));
                                 }else {
                                     player.setPlayerLutemon(Storage.getInstance().getLutemon(0));
                                     Storage.getInstance().removeLutemon(0);

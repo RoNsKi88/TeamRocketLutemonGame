@@ -2,6 +2,9 @@ package com.example.teamrocketlutemongame;
 
 import android.widget.ImageView;
 
+import com.example.teamrocketlutemongame.Lutemons.CashBag;
+import com.example.teamrocketlutemongame.Lutemons.Gray;
+import com.example.teamrocketlutemongame.Lutemons.Green;
 import com.example.teamrocketlutemongame.Lutemons.Orange;
 import com.example.teamrocketlutemongame.Lutemons.Pixeli;
 import com.example.teamrocketlutemongame.Lutemons.Rainbow;
@@ -15,7 +18,7 @@ public class Lutemon extends Specs implements Serializable {
     public static final ArrayList<String> colors = new ArrayList<>(Arrays.asList("Gray","Green","Orange","Pink","Rainbow", "Pixeli"));
     protected static final ArrayList<String> enemyNames = new ArrayList<>(Arrays.asList("SpagettiRyhmä","Työtön","NuoriOsuja","Koodari","LutesinJäsen","Ruotsintentti","Matematiikantentti","Teppo Tarkka-ampuja","Mr Vac"));
     protected static final ArrayList<String> randomLutemonNames = new ArrayList<>(Arrays.asList("Jorma","Kaaleppi","Reiska","PatonkiAnneli","RoNsKi","Keijo","ErittäinKovaKivi!","KovinKivi","KumiTarzan"));
-    protected int attack = 10,defence = 10,maxHealth = 10,health = maxHealth,level = 0,experience,imgFront,imgBack;
+    protected int attack = 10,defence = 10,maxHealth = 10,health = maxHealth,level = 1,experience,imgFront,imgBack;
     private double lvlUp = 1.2;
     protected String special;
     private static int id = 0;
@@ -41,46 +44,51 @@ public class Lutemon extends Specs implements Serializable {
     }
     public void boost(int boost){
         for (int i=0;i<boost;i++){
-            levelUp();
+            if (this instanceof CashBag){
+                for (int j = 0;j < level;j++){
+                    System.out.println("Cashbagin levutus");
+                    maxHealth += 2;
+                }
+            }else{
+                levelUp();
+            }
+
         }
     }
 
     public void addXP(int points){
         experience += points;
-
         if (experience > lvlUp){
             levelUp();
-            level += 1;
             experience = 0;
         }
     }
     protected void levelUp(){
         int j;
+        level += 1;
         lvlUp *= 1.2;
         for (int i = 0;i < level;i++){
             j = (int)(Math.random()*3);
             switch (j){
                 case 0:
                     attack += 1;
-                    //System.out.println("Lvl up, you gain +1 att");
+                    System.out.println("Lvl up, you gain +1 att");
                     break;
                 case 1:
                     defence += 1;
-                    //System.out.println("Lvl up, you gain +1 def");
+                    System.out.println("Lvl up, you gain +1 def");
                     break;
                 case 2:
                     maxHealth += 2;
-                    //System.out.println("Lvl up, you gain +2 hp");
+                    System.out.println("Lvl up, you gain +2 hp");
                     break;
             }
         }
     }
     public int makeAttack(){
         double damage = Math.random() * attack + 1;
-        if (this instanceof Orange){
-            System.out.println("tämä oli Orange");
-        }
-        if (getColor().equals("Rainbow")){
+
+        if (this instanceof Rainbow){   // Rainbos's special. Rolls two times attack roll and bigger is counted.
             System.out.println("tämä on testi");
             double extraRollDamage = Math.random() * attack + 1;
             if(extraRollDamage > damage){
@@ -89,7 +97,7 @@ public class Lutemon extends Specs implements Serializable {
         }
         double randomNumber = Math.random();
         double criticalHitChange;
-        if (getColor().equals("Orange")){
+        if (this instanceof Orange){    // Oranges special critical hit change is double.
             criticalHitChange = 0.2;
         }else {
             criticalHitChange = 0.1;
@@ -105,18 +113,16 @@ public class Lutemon extends Specs implements Serializable {
     public int defend(int attack){
         double randomNumber = Math.random();
         double defendChange = 0.02;
-        if (getColor().equals("Green")){
+        if (this instanceof Green){ //green has bigger change to ignore all damage.
             defendChange = 0.1;
         }
-
         if (randomNumber < defendChange) {                                  //Dodge change
             System.out.println("Vihollinen oli liian ketterä lyönnillesi!");
             attack = 0;
         }
         double extraDefence = 0;
         double defenceRoll = defence * Math.random();
-        if (getColor().equals("Gray")){
-            System.out.println("Harmaa puolustaa!!");
+        if (this instanceof Gray){  // grey gets 2 rolls for defence. only bigger roll is counted.
             extraDefence = defence * Math.random();
             System.out.println("gray kyseessä"+extraDefence+ " "+defenceRoll);
             if (extraDefence > defenceRoll){
@@ -127,6 +133,9 @@ public class Lutemon extends Specs implements Serializable {
         double damage = attack - defenceRoll; //Counts final damage after defending agaist attack
         if (damage < 0){
             damage = 0;
+        }
+        if(this instanceof Pixeli){ //Pixels special. takes only half damage.
+            damage /= 2;
         }
         System.out.println("lopullinen damage defencen jälkeen: "+(int)damage);
         health -= (int)damage;

@@ -9,19 +9,14 @@ public class Pixeli extends Lutemon{
     public Pixeli (String name, boolean hc) {
         // name attack defence health imageFront imageBack hcStatus
         super(name,hc);
-        attack = 10;
-        defence = 10;
-        maxHealth = 40;
+        attack = 30;
+        defence = 30;
+        maxHealth = 100;
         health = maxHealth;
-        imgFront = R.drawable.player_image;
-        imgBack = R.drawable.player_image;
+        imgFront = R.drawable.pixel_back;
+        imgBack = R.drawable.pixel_back;
         special = "Spiky";
         color = "Pixeli";
     }
-    public int makeAttack(){
-        double damage = Math.random() * attack + 1;
 
-
-        return 123;
-    }
 }
