@@ -2,7 +2,7 @@ package com.example.teamrocketlutemongame;
 
 import java.io.Serializable;
 
-public class Specs implements Serializable {
+public abstract class Specs implements Serializable {
     public String name = "pekka";
     public int wins = 0;
     public int losses = 0;

@@ -38,6 +38,7 @@ public class ActivityStartMenu extends AppCompatActivity {
             switch (view.getId()){
                 case (R.id.btnNewGame):
                     Storage.getInstance().getLutemons().clear();
+                    Storage.getInstance().getDeadlutemons().clear();
                     Storage.getInstance().setPlayer(new Character("LutemonMestari"));
                     Storage.getInstance().getPlayer().setPlayerLutemon(new Orange("MaailmanMatkaaja",true));
                     intent = new Intent(ActivityStartMenu.this, ActivityMenu.class);
